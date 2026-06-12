@@ -16,6 +16,19 @@ GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 # --- تنظیمات صفحه استریم‌لیت ---
 st.set_page_config(page_title="تحلیل‌گر صورتحساب بانکی", page_icon="📊", layout="wide")
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    # /* مخفی کردن دکمه‌ها و منوی شناور پایین سمت راست */
+    .stAppDeployButton {display: none !important;}
+    [data-testid="stStatusWidget"] {visibility: hidden;}
+    .stAppViewerToolbar {display: none !important;}
+    </style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 # استایل برای راست‌چین کردن متن‌های فارسی
 # استایل جامع برای راست‌چین کردن کامل و کنترل طول کامپوننت‌ها
