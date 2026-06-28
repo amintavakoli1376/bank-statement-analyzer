@@ -4,10 +4,13 @@ import re
 import json
 from google import genai
 import os
+import requests
+
 from dotenv import load_dotenv
 load_dotenv()
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+# GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 # PROXY_URL = "http://127.0.0.1:10808"
 
 # os.environ['HTTP_PROXY'] = PROXY_URL
@@ -77,7 +80,7 @@ def extract_and_clean_pdf(pdf_file):
 
 def analyze_bank_statement(statement_text, api_key):
     """ارسال متن به هوش مصنوعی و دریافت خروجی"""
-    client = genai.Client(api_key=api_key)
+    # client = genai.Client(api_key=api_key)
 
     prompt = f"""
     You are an expert financial risk analyst. Analyze this 3-month bank statement written in Persian/English.
@@ -118,12 +121,44 @@ def analyze_bank_statement(statement_text, api_key):
     {statement_text}
     """
 
-    response = client.models.generate_content(
-        model="gemini-3.5-flash", 
-        contents=prompt
-    )
+    # response = client.models.generate_content(
+    #     model="gemini-3.5-flash", 
+    #     contents=prompt
+    # )
+
+    # return response.text
+
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        # Optional but recommended by OpenRouter for app tracking
+        "X-Title": "Bank Statement Analyzer",
+    }
     
-    return response.text
+    payload = {
+        "model": "google/gemini-3.5-flash",
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "temperature": 0.0,  
+    }
+
+    response = requests.post(
+        url="https://openrouter.ai/api/v1/chat/completions",
+        headers=headers,
+        json=payload,
+        timeout=120  
+    )
+
+    response.raise_for_status()
+
+    data = response.json()
+    return data["choices"][0]["message"]["content"]
+
+
 
 # --- رابط کاربری (UI) ---
 st.title("📊 تحلیل‌گر هوشمند ریسک اعتباری و صورتحساب بانکی")
@@ -142,7 +177,7 @@ with col_input:
 
 # بخش پردازش پس از فشردن دکمه
 if submit_button:
-    if not GEMINI_API_KEY:
+    if not OPENROUTER_API_KEY:
         st.error("⚠️ کلید API تنظیم نشده است! لطفاً فایل .env یا تنظیمات Secrets سرور را بررسی کنید.")
     elif not uploaded_file:
         st.warning("⚠️ لطفاً ابتدا یک فایل PDF آپلود کنید.")
@@ -152,7 +187,7 @@ if submit_button:
                 extracted_text = extract_and_clean_pdf(uploaded_file)
             
             with st.spinner("🧠 در حال تحلیل مالی توسط هوش مصنوعی..."):
-                result_str = analyze_bank_statement(extracted_text, GEMINI_API_KEY)
+                result_str = analyze_bank_statement(extracted_text, OPENROUTER_API_KEY)
                 
                 clean_json_str = result_str.strip()
                 if clean_json_str.startswith("```json"):
