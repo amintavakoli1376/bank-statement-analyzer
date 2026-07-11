@@ -7,7 +7,7 @@ OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 
 # می‌توانید برای استخراج (ارزان‌تر/سریع‌تر) و روایت‌نویسی (دقیق‌تر) مدل‌های متفاوت انتخاب کنید
 EXTRACTION_MODEL = os.environ.get("EXTRACTION_MODEL", "google/gemini-3.5-flash")
-NARRATIVE_MODEL = os.environ.get("NARRATIVE_MODEL", "google/gemini-2.5-pro")
+NARRATIVE_MODEL = os.environ.get("NARRATIVE_MODEL", "google/gemini-3.1-pro-preview")
 
 MAX_WORKERS = int(os.environ.get("MAX_WORKERS", 5))
 MAX_EXTRACTION_RETRIES = int(os.environ.get("MAX_EXTRACTION_RETRIES", 2))
