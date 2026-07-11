@@ -8,3 +8,4 @@ pandas
 pydantic
 jdatetime
 numpy
+camelot-py[cv]

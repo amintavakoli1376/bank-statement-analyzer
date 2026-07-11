@@ -11,6 +11,7 @@ except ImportError:
     HAS_FITZ = False
 
 import config
+from extractors.camelot_extractor import try_extract_tables
 
 CARD_NUMBER_PATTERN = re.compile(r'\b\d{4}[- ]?\d{4}[- ]?\d{4}[- ]?\d{4}\b')
 
@@ -65,15 +66,18 @@ def _extract_text_with_fitz(file_bytes: bytes, page_idx: int) -> str:
 
 def extract_page_data(file_bytes: bytes):
     """
-    استخراج متن یا تصویر هر صفحه PDF.
-    فقط دو حالت:
-      1. "llm_required"     — متن کافی موجود است
-      2. "image_required"   — صفحه تصویری/اسکن (نیاز به vision LLM)
+    استخراج متن، تصویر یا جدول هر صفحه PDF.
 
-    جدول‌ها توسط LLM پردازش می‌شوند، نه pdfplumber.
+    سه حالت:
+      1. "camelot"          — جدول ساختاریافته قابل استخراج با Camelot
+      2. "llm_required"     — متن کافی موجود است
+      3. "image_required"   — صفحه تصویری/اسکن (نیاز به vision LLM)
     """
     pages_data = []
     with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
+        total_pages = len(pdf.pages)
+        print(f"\n📖 [splitter] شروع استخراج از PDF با {total_pages} صفحه")
+
         for page_idx, page in enumerate(pdf.pages):
             page_num = page_idx + 1
 
@@ -85,7 +89,19 @@ def extract_page_data(file_bytes: bytes):
             fitz_text = _extract_text_with_fitz(file_bytes, page_idx)
             effective_text = fitz_text if (fitz_text and len(fitz_text) > len(text_stripped)) else text_stripped
 
-            # تصمیم‌گیری: متنی یا تصویری
+            # ─── اولویت اول: تلاش برای استخراج جدول با Camelot ───
+            if config.USE_CAMELOT:
+                camelot_dfs = try_extract_tables(file_bytes, page_idx)
+                if camelot_dfs:
+                    pages_data.append({
+                        "method": "camelot",
+                        "page_number": page_num,
+                        "tables_data": camelot_dfs,
+                        "raw_text": effective_text,  # برای استخراج نام صاحب حساب
+                    })
+                    continue
+
+            # ─── اولویت دوم: متن یا تصویر ───
             if len(effective_text) >= config.MIN_TEXT_LENGTH_FOR_IMAGE:
                 pages_data.append({
                     "method": "llm_required",
@@ -101,6 +117,14 @@ def extract_page_data(file_bytes: bytes):
                     "raw_text": effective_text,
                 })
 
+    # لاگ خلاصه‌ی روش استخراج هر صفحه
+    print(f"📖 [splitter] استخراج کامل شد:")
+    labels = {"camelot": "📊 جدولی", "llm_required": "📝 متنی", "image_required": "🖼️ تصویری"}
+    for p in pages_data:
+        len_text = len(p.get("raw_text", ""))
+        label = labels.get(p["method"], p["method"])
+        print(f"   صفحه {p['page_number']}: {label} (متن: {len_text} کاراکتر)")
+
     return pages_data
 
 
@@ -109,52 +133,128 @@ def extract_page_data(file_bytes: bytes):
 
 def split_pages_with_context(pages_data, overlap_lines: int = 2):
     """
-    گروه‌بندی چند صفحه در یک chunk برای ارسال به LLM.
+    گروه‌بندی صفحات در chunk برای پردازش.
 
-    هر chunk شامل PAGES_PER_CHUNK صفحه متوالی است.
-    متن صفحات با جداکننده مشخص ترکیب می‌شود.
+    استراتژی:
+    - صفحات غیر-camelot (متنی + تصویری): در گروه‌های PAGES_PER_CHUNK صفحه batch می‌شوند.
+      همه‌ی تصاویر هر گروه در یک درخواست multimodal به LLM ارسال می‌شوند
+      (هیچ تصویری drop نمی‌شود).
+    - صفحات جدولی (camelot): هر کدام یک chunk مستقل (بدون نیاز به LLM).
     """
     pages_per_chunk = config.PAGES_PER_CHUNK
     chunks = []
 
-    for start_idx in range(0, len(pages_data), pages_per_chunk):
-        group = pages_data[start_idx : start_idx + pages_per_chunk]
-        start_page = group[0]["page_number"]
-        end_page = group[-1]["page_number"]
+    # لاگ خلاصه‌ی صفحات ورودی
+    method_summary = {}
+    for p in pages_data:
+        m = p["method"]
+        method_summary[m] = method_summary.get(m, 0) + 1
+    print(f"\n📄 [splitter] صفحات ورودی: {len(pages_data)} صفحه | روش‌ها: {method_summary}")
 
-        # آیا همه صفحات متنی هستند یا تصویری؟
-        has_image = any(p["method"] == "image_required" for p in group)
-        image_b64 = None
-        if has_image:
-            # اولین صفحه تصویری
-            for p in group:
-                if p["method"] == "image_required":
-                    image_b64 = p.get("image_b64")
-                    break
+    # ─── قدم ۱: صفحات camelot → chunk مستقل (بدون LLM) ────────────────────────
+    non_camelot_pages = []
+    for p in pages_data:
+        if p["method"] == "camelot":
+            chunks.append({
+                "page_number": p["page_number"],
+                "page_range": str(p["page_number"]),
+                "method": "camelot",
+                "tables_data": p.get("tables_data"),
+                "raw_text": p.get("raw_text", ""),
+                "page_count": 1,
+            })
+        else:
+            non_camelot_pages.append(p)
 
-        # ترکیب متن صفحات
+    # ─── قدم ۲: صفحات متنی + تصویری → batch در گروه‌های PAGES_PER_CHUNK ───────
+    max_images = config.MAX_IMAGES_PER_REQUEST
+
+    for start_idx in range(0, len(non_camelot_pages), pages_per_chunk):
+        group = non_camelot_pages[start_idx : start_idx + pages_per_chunk]
+
+        # جمع‌آوری همه‌ی تصاویر گروه
+        images_b64 = []
+        for p in group:
+            if p["method"] == "image_required" and p.get("image_b64"):
+                images_b64.append({
+                    "page_number": p["page_number"],
+                    "image_b64": p["image_b64"],
+                })
+
+        # ترکیب متن صفحات با جداکننده
         text_parts = []
         for p in group:
             raw_text = p.get("raw_text", "")
-            masked_text = mask_sensitive_info(raw_text)
-            text_parts.append(
-                f"--- صفحه {p['page_number']} ---\n{masked_text}"
-            )
-
+            if raw_text:
+                masked_text = mask_sensitive_info(raw_text)
+                text_parts.append(
+                    f"--- صفحه {p['page_number']} ---\n{masked_text}"
+                )
         chunk_text = "\n\n".join(text_parts)
 
-        chunk = {
-            "page_number": start_page,  # صفحه شروع
-            "page_range": f"{start_page}-{end_page}",
-            "method": "image_required" if has_image else "llm_required",
-            "text": chunk_text,
-            "raw_length": len(chunk_text),
-            "page_count": len(group),
-        }
+        # اگر تعداد تصاویر از محدودیت بیشتر است، بشکون به زیر-chunks
+        if images_b64 and len(images_b64) > max_images:
+            img_idx = 0
+            while img_idx < len(images_b64):
+                sub_imgs = images_b64[img_idx : img_idx + max_images]
+                sub_start_page = sub_imgs[0]["page_number"]
+                sub_end_page = sub_imgs[-1]["page_number"]
 
-        if image_b64:
-            chunk["image_b64"] = image_b64
+                # متن فقط صفحات این زیر-chunk
+                sub_pages = set(im["page_number"] for im in sub_imgs)
+                sub_text_parts = []
+                for p in group:
+                    if p["page_number"] in sub_pages and p.get("raw_text"):
+                        sub_text_parts.append(
+                            f"--- صفحه {p['page_number']} ---\n{mask_sensitive_info(p['raw_text'])}"
+                        )
+                # اگر متن اضافی هم از صفحات غیر-تصویری داریم، بذاریم
+                for p in group:
+                    if p["method"] != "image_required" and p.get("raw_text"):
+                        sub_text_parts.append(
+                            f"--- صفحه {p['page_number']} ---\n{mask_sensitive_info(p['raw_text'])}"
+                        )
+                sub_text = "\n\n".join(sub_text_parts)
 
-        chunks.append(chunk)
+                chunks.append({
+                    "page_number": sub_start_page,
+                    "page_range": f"{sub_start_page}-{sub_end_page}",
+                    "method": "image_required",
+                    "text": sub_text,
+                    "raw_length": len(sub_text),
+                    "page_count": len(sub_imgs),
+                    "images_b64": sub_imgs,
+                })
+                img_idx += max_images
+        else:
+            start_page = group[0]["page_number"]
+            end_page = group[-1]["page_number"]
+            method = "image_required" if images_b64 else "llm_required"
+            chunk = {
+                "page_number": start_page,
+                "page_range": f"{start_page}-{end_page}",
+                "method": method,
+                "text": chunk_text,
+                "raw_length": len(chunk_text),
+                "page_count": len(group),
+            }
+            if images_b64:
+                chunk["images_b64"] = images_b64
+            chunks.append(chunk)
+
+    # مرتب‌سازی chunks بر اساس page_number اولین صفحه
+    chunks.sort(key=lambda c: c["page_number"])
+
+    # ─── لاگ خلاصه‌ی chunks ساخته‌شده ──────────────────────────────────────────
+    print(f"📦 [splitter] تعداد chunks ساخته‌شده: {len(chunks)}")
+    for c in chunks:
+        if c["method"] == "image_required":
+            n_imgs = len(c.get("images_b64", []))
+            print(f"   chunk صفحات {c['page_range']}: 🖼️ {n_imgs} تصویر + متن ({c.get('raw_length', 0)} کاراکتر)")
+        elif c["method"] == "llm_required":
+            print(f"   chunk صفحات {c['page_range']}: 📝 متنی ({c['page_count']} صفحه، {c.get('raw_length', 0)} کاراکتر)")
+        else:
+            print(f"   chunk صفحه {c['page_number']}: 📊 جدولی (camelot)")
+    print()
 
     return chunks

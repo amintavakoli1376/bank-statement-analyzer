@@ -8,6 +8,7 @@ from processing.merger import run_merge_pipeline
 from processing.validator import verify_balance_continuity
 from processing.feature_engine import compute_features
 from analysis.narrative_llm import generate_narrative
+from analysis.account_router import route_and_analyze
 
 # --- تنظیمات صفحه استریم‌لیت ---
 st.set_page_config(page_title="تحلیل‌گر صورتحساب بانکی", page_icon="📊", layout="wide")
@@ -40,6 +41,14 @@ st.markdown("""
 
 st.title("📊 تحلیل‌گر هوشمند ریسک اعتباری و صورتحساب بانکی")
 st.write("این نسخه با معماری Chunk-based Processing، صورتحساب‌های چند صفحه‌ای را صفحه‌به‌صفحه پردازش می‌کند تا هیچ تراکنشی از قلم نیفتد.")
+
+# نمایش تنظیمات فعلی
+print(f"\n⚙️ [config] EXTRACTION_MODEL = {config.EXTRACTION_MODEL}")
+print(f"⚙️ [config] NARRATIVE_MODEL = {config.NARRATIVE_MODEL}")
+print(f"⚙️ [config] PAGES_PER_CHUNK = {config.PAGES_PER_CHUNK}")
+print(f"⚙️ [config] MAX_IMAGES_PER_REQUEST = {config.MAX_IMAGES_PER_REQUEST}")
+print(f"⚙️ [config] MAX_OUTPUT_TOKENS = {config.MAX_OUTPUT_TOKENS}")
+
 st.markdown("---")
 
 col_space1, col_input, col_space2 = st.columns([1, 2, 1])
@@ -69,6 +78,7 @@ if submit_button:
                 method_counts[m] = method_counts.get(m, 0) + 1
 
             method_labels = {
+                "camelot": "📊 جدولی (Camelot)",
                 "llm_required": "📝 متنی (LLM)",
                 "image_required": "🖼️ تصویری (Vision LLM)",
             }
@@ -133,16 +143,28 @@ if submit_button:
             with st.expander("📊 فیچرهای مالی محاسبه‌شده (deterministic)"):
                 st.json(features)
 
-            # ---------- قدم ۴: تحلیل کیفی توسط مدل ----------
+            # ---------- قدم ۴: Two-Step LLM Routing (دسته‌بندی + تحلیل تخصصی) ----------
+            with st.spinner("🧠 در حال دسته‌بندی نوع حساب و تحلیل تخصصی توسط هوش مصنوعی..."):
+                routing_result = route_and_analyze(
+                    features=features,
+                    api_key=config.OPENROUTER_API_KEY,
+                )
+
+            # ---------- قدم ۵: تحلیل کیفی نهایی (با استفاده از خروجی Routing) ----------
             with st.spinner("🧠 در حال تولید تحلیل روایت ریسک توسط هوش مصنوعی..."):
                 final_result = generate_narrative(
                     features=features,
                     quality_report=quality_report,
                     account_holder_name=merge_metadata.get("account_holder_name"),
                     api_key=config.OPENROUTER_API_KEY,
+                    routing_result=routing_result,
                 )
 
             st.success("✅ تحلیل با موفقیت انجام شد!")
+
+            # استخراج transactional_power_score از تحلیل تخصصی (فقط برای حساب تجاری)
+            if routing_result and routing_result.get("account_type") == "BUSINESS":
+                final_result["transactional_power_score"] = routing_result.get("analysis", {}).get("transactional_power_score", "-")
 
             st.markdown("### 📋 خلاصه وضعیت مالی گردش حساب")
             m_col1, m_col2, m_col3 = st.columns(3)
@@ -166,6 +188,18 @@ if submit_button:
                 f"<span style='color:{risk_color}; font-size:24px; font-weight:bold;'>{risk}</span></div>",
                 unsafe_allow_html=True,
             )
+
+            # نمایش امتیاز قدرت نقدینگی (فقط برای حساب تجاری)
+            tps = final_result.get("transactional_power_score")
+            if tps and tps != "-":
+                st.write("")
+                st.markdown(
+                    f"<div style='background-color:#f0f7ff; padding: 15px; border-radius: 5px; "
+                    f"border-right: 5px solid #1976d2;'><b>🏦 امتیاز قدرت نقدینگی (Transactional Power Score):</b> "
+                    f"<span style='color:#1976d2; font-size:24px; font-weight:bold;'>{tps} / ۱۰</span>"
+                    f"<br><small style='color:#666;'>بر اساس حجم حواله‌ها و خریدهای مستمر تجاری</small></div>",
+                    unsafe_allow_html=True,
+                )
 
             st.markdown("---")
             st.markdown("### 📝 گزارش تفصیلی هوش مصنوعی:")

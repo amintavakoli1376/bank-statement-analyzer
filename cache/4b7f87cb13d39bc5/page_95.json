@@ -1,0 +1,28 @@
+{
+  "page_number": 95,
+  "account_holder_name": null,
+  "transactions": [
+    {
+      "date": "1404/10/15",
+      "time": "11:57:36",
+      "description": "1404101505634911573680610 برداشت از سپرده بابت کارمزد انتقال پل: - کد پیگیری تراکنش اصلی:",
+      "deposit": 0.0,
+      "withdrawal": 22900.0,
+      "balance": 226677596.0,
+      "source_page": 95,
+      "row_order": 1
+    },
+    {
+      "date": "1404/10/15",
+      "time": "11:57:36",
+      "description": "حسن زاده دولق - کد پیگیری تراکنش: 1404101505634911573680610 انتقال پل به شماره شبا: IR910610000004001003384631 بانک شهر بنام سجاد",
+      "deposit": 0.0,
+      "withdrawal": 114500000.0,
+      "balance": 226700496.0,
+      "source_page": 95,
+      "row_order": 2
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "camelot: 2 تراکنش استخراج شد"
+}

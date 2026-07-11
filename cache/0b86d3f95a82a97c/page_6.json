@@ -1,0 +1,458 @@
+{
+  "page_number": 6,
+  "account_holder_name": null,
+  "transactions": [
+    {
+      "date": "1405/04/04",
+      "time": "00:26:53",
+      "description": "برداشت بابت کارمزد اعلام مانده کارت- شتابی",
+      "deposit": 0.0,
+      "withdrawal": 1800.0,
+      "balance": 2907569432.0,
+      "source_page": 6,
+      "row_order": 0
+    },
+    {
+      "date": "1405/04/03",
+      "time": "15:33:06",
+      "description": "خرید اینترنتی پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 9030000.0,
+      "balance": 2907571232.0,
+      "source_page": 6,
+      "row_order": 1
+    },
+    {
+      "date": "1405/04/03",
+      "time": "15:22:40",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 30000000.0,
+      "balance": 2916601232.0,
+      "source_page": 6,
+      "row_order": 2
+    },
+    {
+      "date": "1405/04/03",
+      "time": "14:36:34",
+      "description": "پل-۱۴۰۵۰۴۰۳۱۴۳۹۳۲۹۸۰۱۵-سیدمهدی میرجمالی",
+      "deposit": 320000000.0,
+      "withdrawal": 0.0,
+      "balance": 2946601232.0,
+      "source_page": 6,
+      "row_order": 3
+    },
+    {
+      "date": "1405/04/03",
+      "time": "04:11:49",
+      "description": "پرداخت قبض از آسان پرداخت پرشین",
+      "deposit": 0.0,
+      "withdrawal": 3803800.0,
+      "balance": 2626601232.0,
+      "source_page": 6,
+      "row_order": 4
+    },
+    {
+      "date": "1405/04/03",
+      "time": "02:31:03",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 3200000.0,
+      "balance": 2630405032.0,
+      "source_page": 6,
+      "row_order": 5
+    },
+    {
+      "date": "1405/04/03",
+      "time": "02:30:54",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 16749000.0,
+      "balance": 2633605032.0,
+      "source_page": 6,
+      "row_order": 6
+    },
+    {
+      "date": "1405/04/03",
+      "time": "01:29:59",
+      "description": "کارت به کارت از ۷۱۷۲ همراه بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 135050600.0,
+      "balance": 2650354032.0,
+      "source_page": 6,
+      "row_order": 7
+    },
+    {
+      "date": "1405/04/02",
+      "time": "12:18:24",
+      "description": "کارت به کارت از ۷۱۷۲ همراه بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 150053800.0,
+      "balance": 2785404632.0,
+      "source_page": 6,
+      "row_order": 8
+    },
+    {
+      "date": "1405/04/02",
+      "time": "12:11:04",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 5000000.0,
+      "balance": 2935458432.0,
+      "source_page": 6,
+      "row_order": 9
+    },
+    {
+      "date": "1405/04/01",
+      "time": "22:00:33",
+      "description": "کارت به کارت از ۷۱۷۲ همراه بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 30015400.0,
+      "balance": 2940458432.0,
+      "source_page": 7,
+      "row_order": 10
+    },
+    {
+      "date": "1405/04/01",
+      "time": "18:46:01",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 4000000.0,
+      "balance": 2970473832.0,
+      "source_page": 7,
+      "row_order": 11
+    },
+    {
+      "date": "1405/04/01",
+      "time": "15:54:34",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1700000.0,
+      "balance": 2974473832.0,
+      "source_page": 7,
+      "row_order": 12
+    },
+    {
+      "date": "1405/04/01",
+      "time": "15:18:09",
+      "description": "کارت به کارت از ۷۱۷۲ همراه بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 40018600.0,
+      "balance": 2976173832.0,
+      "source_page": 7,
+      "row_order": 13
+    },
+    {
+      "date": "1405/04/01",
+      "time": "15:03:41",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 516000.0,
+      "balance": 3016192432.0,
+      "source_page": 7,
+      "row_order": 14
+    },
+    {
+      "date": "1405/04/01",
+      "time": "15:02:33",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 988000.0,
+      "balance": 3016708432.0,
+      "source_page": 7,
+      "row_order": 15
+    },
+    {
+      "date": "1405/04/01",
+      "time": "15:01:32",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 774000.0,
+      "balance": 3017696432.0,
+      "source_page": 7,
+      "row_order": 16
+    },
+    {
+      "date": "1405/04/01",
+      "time": "14:53:07",
+      "description": "حواله همراه بانک بابت ۲۷۶۳۸۱۱۸۹۱",
+      "deposit": 0.0,
+      "withdrawal": 400000450.0,
+      "balance": 3018470432.0,
+      "source_page": 7,
+      "row_order": 17
+    },
+    {
+      "date": "1405/04/01",
+      "time": "12:29:39",
+      "description": "پل ۱۴۰۵۰۴۰۱۰۱۲۳۱۲۲۹۴۱۹۶۴ از همراه بانک",
+      "deposit": 0.0,
+      "withdrawal": 340000000.0,
+      "balance": 3418470882.0,
+      "source_page": 7,
+      "row_order": 18
+    },
+    {
+      "date": "1405/04/01",
+      "time": "12:29:39",
+      "description": "کارمزد پل ۱۴۰۵۰۴۰۱۰۱۲۳۱۲۲۹۴۱۹۶۴",
+      "deposit": 0.0,
+      "withdrawal": 68000.0,
+      "balance": 3758470882.0,
+      "source_page": 7,
+      "row_order": 19
+    },
+    {
+      "date": "1405/03/31",
+      "time": "21:44:45",
+      "description": "حواله همراه بانک بابت ۱۴۴۲۷۰۰۴۱۳",
+      "deposit": 0.0,
+      "withdrawal": 80000450.0,
+      "balance": 3758538882.0,
+      "source_page": 8,
+      "row_order": 20
+    },
+    {
+      "date": "1405/03/31",
+      "time": "19:10:42",
+      "description": "پل-۱۴۰۵۰۳۳۱۰۵۷۳۰۱۵۴۸۷۵۹-ق.اد-نسرین تدوینی غرب",
+      "deposit": 400000000.0,
+      "withdrawal": 0.0,
+      "balance": 3838539332.0,
+      "source_page": 8,
+      "row_order": 21
+    },
+    {
+      "date": "1405/03/31",
+      "time": "12:30:47",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 3130000.0,
+      "balance": 3438539332.0,
+      "source_page": 8,
+      "row_order": 22
+    },
+    {
+      "date": "1405/03/31",
+      "time": "12:22:30",
+      "description": "اصلاحیه خرید اینترنتی به پرداخت ملت",
+      "deposit": 10130000.0,
+      "withdrawal": 0.0,
+      "balance": 3441669332.0,
+      "source_page": 8,
+      "row_order": 23
+    },
+    {
+      "date": "1405/03/31",
+      "time": "13:01:36",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 10130000.0,
+      "balance": 3431539332.0,
+      "source_page": 8,
+      "row_order": 24
+    },
+    {
+      "date": "1405/03/31",
+      "time": "01:44:25",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 520000.0,
+      "balance": 3441669332.0,
+      "source_page": 8,
+      "row_order": 25
+    },
+    {
+      "date": "1405/03/31",
+      "time": "00:49:08",
+      "description": "واریز یارانه مرحله ۱۸۴ سال ۱۴۰۵",
+      "deposit": 12000000.0,
+      "withdrawal": 0.0,
+      "balance": 3442189332.0,
+      "source_page": 8,
+      "row_order": 26
+    },
+    {
+      "date": "1405/03/30",
+      "time": "20:13:14",
+      "description": "پل ۱۴۰۵۰۳۳۰۰۱۲۳۲۰۱۳۱۵۸۸۷ از همراه بانک",
+      "deposit": 0.0,
+      "withdrawal": 200000000.0,
+      "balance": 3430189332.0,
+      "source_page": 8,
+      "row_order": 27
+    },
+    {
+      "date": "1405/03/30",
+      "time": "20:13:13",
+      "description": "کارمزد پل ۱۴۰۵۰۳۳۰۰۱۲۳۲۰۱۳۱۵۸۸۷",
+      "deposit": 0.0,
+      "withdrawal": 40000.0,
+      "balance": 3630189332.0,
+      "source_page": 8,
+      "row_order": 28
+    },
+    {
+      "date": "1405/03/30",
+      "time": "15:53:29",
+      "description": "حواله همراه بانک بابت ۹۸۷۱۲۵۳۴۹۶",
+      "deposit": 800000000.0,
+      "withdrawal": 0.0,
+      "balance": 3630229332.0,
+      "source_page": 8,
+      "row_order": 29
+    },
+    {
+      "date": "1405/03/30",
+      "time": "15:16:20",
+      "description": "پرداخت قبض از آسان پرداخت پرشین",
+      "deposit": 0.0,
+      "withdrawal": 3803800.0,
+      "balance": 2830229332.0,
+      "source_page": 9,
+      "row_order": 30
+    },
+    {
+      "date": "1405/03/30",
+      "time": "14:07:53",
+      "description": "پل-۱۴۰۵۰۳۳۰۰۹۸۸۷۱۳۲۹-ق.اد-نسرین تدوینی غرب",
+      "deposit": 1000000000.0,
+      "withdrawal": 0.0,
+      "balance": 2834033132.0,
+      "source_page": 9,
+      "row_order": 31
+    },
+    {
+      "date": "1405/03/30",
+      "time": "09:10:46",
+      "description": "برداشت انتقالی طی چک",
+      "deposit": 0.0,
+      "withdrawal": 800000000.0,
+      "balance": 1834033132.0,
+      "source_page": 9,
+      "row_order": 32
+    },
+    {
+      "date": "1405/03/29",
+      "time": "16:55:49",
+      "description": "حواله همراه بانک بابت ۱۴۴۲۷۰۰۴۱۳",
+      "deposit": 400000000.0,
+      "withdrawal": 0.0,
+      "balance": 2634033132.0,
+      "source_page": 9,
+      "row_order": 33
+    },
+    {
+      "date": "1405/03/29",
+      "time": "16:54:06",
+      "description": "حواله همراه بانک بابت ۴۴۹۱۹۶۶۸۲۷",
+      "deposit": 400000000.0,
+      "withdrawal": 0.0,
+      "balance": 2234033132.0,
+      "source_page": 9,
+      "row_order": 34
+    },
+    {
+      "date": "1405/03/28",
+      "time": "16:08:48",
+      "description": "خرید اینترنتی پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 2636000.0,
+      "balance": 1834033132.0,
+      "source_page": 9,
+      "row_order": 35
+    },
+    {
+      "date": "1405/03/27",
+      "time": "23:37:40",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 2923800.0,
+      "balance": 1836669132.0,
+      "source_page": 9,
+      "row_order": 36
+    },
+    {
+      "date": "1405/03/27",
+      "time": "11:44:37",
+      "description": "وصول چک چکاوک-۱۹۴۹/۶۱۳۹۳۳۴۲-۱۴۶۵۱۹۷۲۹",
+      "deposit": 0.0,
+      "withdrawal": 500000000.0,
+      "balance": 1839592932.0,
+      "source_page": 9,
+      "row_order": 37
+    },
+    {
+      "date": "1405/03/27",
+      "time": "10:00:34",
+      "description": "پل-۱۴۰۵۰۳۲۷۱۰۰۰۱۸۹۳۷۰۵۶۳۱۸۷۸۱۳۵۹۴-شیما طایفه",
+      "deposit": 200000000.0,
+      "withdrawal": 0.0,
+      "balance": 2339592932.0,
+      "source_page": 9,
+      "row_order": 38
+    },
+    {
+      "date": "1405/03/27",
+      "time": "09:57:26",
+      "description": "کارت به کارت سامان",
+      "deposit": 150000000.0,
+      "withdrawal": 0.0,
+      "balance": 2139592932.0,
+      "source_page": 9,
+      "row_order": 39
+    },
+    {
+      "date": "1405/03/27",
+      "time": "09:56:42",
+      "description": "کارت به کارت پاسارگاد",
+      "deposit": 150000000.0,
+      "withdrawal": 0.0,
+      "balance": 1989592932.0,
+      "source_page": 10,
+      "row_order": 40
+    },
+    {
+      "date": "1405/03/25",
+      "time": "23:50:41",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1156000.0,
+      "balance": 1839592932.0,
+      "source_page": 10,
+      "row_order": 41
+    },
+    {
+      "date": "1405/03/25",
+      "time": "23:49:17",
+      "description": "خرید اینترنتی به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 950000.0,
+      "balance": 1840698932.0,
+      "source_page": 10,
+      "row_order": 42
+    },
+    {
+      "date": "1405/03/25",
+      "time": "23:47:51",
+      "description": "پرداخت قبض از آسان پرداخت پرشین",
+      "deposit": 0.0,
+      "withdrawal": 3803800.0,
+      "balance": 1841648932.0,
+      "source_page": 10,
+      "row_order": 43
+    },
+    {
+      "date": "1405/03/24",
+      "time": "11:42:10",
+      "description": "وصول چک چکاوک-۱۹۴۹/۶۱۳۹۳۳۴۶-۱۴۶۵۱۴۰۵۹",
+      "deposit": 0.0,
+      "withdrawal": 500000000.0,
+      "balance": 1845452732.0,
+      "source_page": 10,
+      "row_order": 44
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "استخراج تصویری از صفحات 6-10 (5 تصویر)"
+}

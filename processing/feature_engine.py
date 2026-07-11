@@ -30,12 +30,40 @@ def compute_regularity(salary_df: pd.DataFrame) -> str:
     return "regular" if diffs.between(25, 35).all() else "irregular"
 
 
-def compute_features(df: pd.DataFrame) -> dict:
-    """قدم ۳: تمام فیچرها با کد deterministic محاسبه می‌شوند، نه مدل."""
+def compute_features(df: pd.DataFrame, business_margin_rate: float = 0.10) -> dict:
+    """قدم ۳: تمام فیچرها با کد deterministic محاسبه می‌شوند، نه مدل.
+
+    Args:
+        df: دیتافریم تراکنش‌ها.
+        business_margin_rate: نرخ حاشیه سود تجاری (پیش‌فرض ۱۰٪) برای تخمین سود کسب‌وکار.
+    """
     if df.empty:
         return {"error": "no_transactions_found"}
 
     df = df.copy()
+
+    # --- مرتب‌سازی بر اساس تاریخ (FIX 2) ---
+    # اگر parsed_date وجود داشته باشه، دیتافریم رو صعودی sort می‌کنیم تا
+    # opening_balance، closing_balance و محاسبات مبتنی بر ترتیب درست باشن.
+    if "parsed_date" in df.columns:
+        df = df.sort_values("parsed_date", ascending=True).reset_index(drop=True)
+
+    # --- تبدیل امن به numeric (FIX 7) ---
+    # اگر ستون‌های مالی به صورت رشته با جداکننده‌ی هزارگان باشن (مثل "1,000,000")،
+    # جمع اشتباه محاسبه می‌شه. ابتدا کاما رو حذف می‌کنیم، سپس با pd.to_numeric و
+    # errors="coerce" امن سازی می‌کنیم.
+    for col in ["deposit", "withdrawal"]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(
+                df[col].astype(str).str.replace(",", "", regex=False),
+                errors="coerce",
+            )
+    if "balance" in df.columns:
+        df["balance"] = pd.to_numeric(
+            df["balance"].astype(str).str.replace(",", "", regex=False),
+            errors="coerce",
+        )
+
     df["deposit"] = df["deposit"].fillna(0)
     df["withdrawal"] = df["withdrawal"].fillna(0)
 
@@ -46,14 +74,30 @@ def compute_features(df: pd.DataFrame) -> dict:
     features["avg_balance"] = df["balance"].mean() if has_balance else None
     features["min_balance"] = df["balance"].min() if has_balance else None
     features["max_balance"] = df["balance"].max() if has_balance else None
+    # opening_balance و closing_balance حالا روی دیتافریم مرتب‌شده درست کار می‌کنن.
     features["opening_balance"] = df["balance"].iloc[0] if has_balance else None
     features["closing_balance"] = df["balance"].iloc[-1] if has_balance else None
 
     # --- روزهای منفی‌شدن موجودی ---
     if has_balance:
         neg_rows = df[df["balance"] < 0]
-        features["negative_balance_days_count"] = int(neg_rows["date"].nunique()) if not neg_rows.empty else 0
-        features["negative_balance_max_magnitude"] = float(neg_rows["balance"].min()) if not neg_rows.empty else 0
+        if not neg_rows.empty:
+            # FIX 4: به‌جای date (رشته)، از parsed_date.dt.date استفاده می‌کنیم تا
+            # صرف‌نظر از فرمت رشته‌ای، روزهای یکتا به درستی شمارش بشن. اگر
+            # parsed_date موجود نباشه، به date فال‌بک می‌کنیم.
+            if "parsed_date" in neg_rows.columns:
+                features["negative_balance_days_count"] = int(
+                    neg_rows["parsed_date"].dt.date.nunique()
+                )
+            else:
+                features["negative_balance_days_count"] = int(neg_rows["date"].nunique())
+            # FIX 3: magnitude باید قدر مطلق منفی‌ترین موجودی باشه، نه خود عدد منفی.
+            features["negative_balance_max_magnitude"] = float(
+                abs(neg_rows["balance"].min())
+            )
+        else:
+            features["negative_balance_days_count"] = 0
+            features["negative_balance_max_magnitude"] = 0
     else:
         features["negative_balance_days_count"] = 0
         features["negative_balance_max_magnitude"] = 0
@@ -74,10 +118,13 @@ def compute_features(df: pd.DataFrame) -> dict:
     features["avg_salary"] = float(salary_df["deposit"].mean()) if not salary_df.empty else None
     features["salary_regularity"] = compute_regularity(salary_df)
 
-    # --- تشخیص تراکنش‌های غیرعادی (outlier) با روش IQR ---
+    # --- تشخیص تراکنش‌های غیرعادی (outlier) با روش IQR (FIX 6) ---
     amounts = df["deposit"] + df["withdrawal"]
-    if amounts.notna().sum() >= 4:
-        q1, q3 = amounts.quantile([0.25, 0.75])
+    # تراکنش‌های صفر-صفر رو از محاسبه‌ی IQR خارج می‌کنیم تا توزیع منحرف نشه.
+    nonzero_mask = ~((df["deposit"] == 0) & (df["withdrawal"] == 0))
+    valid_amounts = amounts[nonzero_mask]
+    if valid_amounts.notna().sum() >= 4:
+        q1, q3 = valid_amounts.quantile([0.25, 0.75])
         iqr = q3 - q1
         lower_bound, upper_bound = q1 - 1.5 * iqr, q3 + 1.5 * iqr
         outlier_mask = (amounts < lower_bound) | (amounts > upper_bound)
@@ -91,7 +138,9 @@ def compute_features(df: pd.DataFrame) -> dict:
 
     # --- تفکیک ماهانه و درآمد/مخارج ---
     if "parsed_date" in df.columns and df["parsed_date"].notna().any():
-        df["month"] = df["parsed_date"].apply(lambda d: d.strftime("%Y-%m") if pd.notna(d) else None)
+        valid_dates = df["parsed_date"].dropna()
+
+        df["month"] = valid_dates.apply(lambda d: d.strftime("%Y-%m") if pd.notna(d) else None)
         monthly = df.dropna(subset=["month"]).groupby("month").agg(
             total_deposit=("deposit", "sum"),
             total_withdrawal=("withdrawal", "sum"),
@@ -102,25 +151,64 @@ def compute_features(df: pd.DataFrame) -> dict:
             for month, row in monthly.iterrows()
         }
 
+        # FIX 5: n_months بر اساس مدت زمان واقعی داده (داینامیک).
+        # به‌جای تعداد ماه‌های تقویمی، تعداد روزهای واقعی داده رو محاسبه می‌کنیم
+        # و بر 30.44 (میانگین روز در یک ماه) تقسیم می‌کنیم.
+        # مثال: داده 23 خرداد تا 16 تیر = 23 روز ≈ 0.76 ماه
+        min_date = valid_dates.min()
+        max_date = valid_dates.max()
+        date_range_days = (max_date - min_date).days + 1
+        # 30.44 = میانگین روز در یک ماه تقویمی (365.25/12)
+        n_months = max(date_range_days / 30.44, 1)
+        features["date_range_days"] = int(date_range_days)
+        features["n_months_used"] = round(n_months, 2)
+
         if not salary_df.empty:
             salary_monthly = salary_df.groupby(
                 salary_df["parsed_date"].apply(lambda d: d.strftime("%Y-%m"))
             )["deposit"].sum()
-            features["avg_monthly_income"] = float(salary_monthly.mean())
+            # FIX 1: avg_monthly_income حالا با همون مبنای n_months محاسبه می‌شه که
+            # avg_monthly_expenses. مجموع حقوق‌ها / تعداد کل ماه‌ها، نه میانگین
+            # ماه‌هایی که حقوق واریز شده. این باعث می‌شه net_monthly_surplus معنی‌دار باشه.
+            features["avg_monthly_income"] = float(salary_monthly.sum() / n_months)
         else:
             features["avg_monthly_income"] = None
 
-        n_months = max(monthly.shape[0], 1)
         features["avg_monthly_expenses"] = float(total_withdrawal / n_months)
         features["net_monthly_surplus"] = (
             features["avg_monthly_income"] - features["avg_monthly_expenses"]
             if features["avg_monthly_income"] is not None else None
         )
+
+        # --- فیچرهای جدید ---
+        pos_keywords = "پایانه فروش|خرید|POS|درگاه"
+        pos_mask = df["description"].astype(str).str.contains(pos_keywords, case=False, na=False, regex=True)
+        features["pos_purchases_total"] = float(df.loc[pos_mask, "withdrawal"].sum())
+
+        b2b_keywords = "پایا|ساتنا|پل|شبا"
+        b2b_mask = df["description"].astype(str).str.contains(b2b_keywords, case=False, na=False, regex=True)
+        features["b2b_transfers_total"] = float(df.loc[b2b_mask, "withdrawal"].sum())
+
+        # --- monthly_avg_turnover ---
+        features["monthly_avg_turnover"] = round(total_deposit / n_months, 3) if n_months else None
+
+        # --- estimated_business_profit (کاملاً داینامیک) ---
+        if salary_df.empty:
+            features["estimated_business_profit"] = round(
+                features["monthly_avg_turnover"] * business_margin_rate, 3
+            ) if features["monthly_avg_turnover"] is not None else None
+        else:
+            features["estimated_business_profit"] = None
+
     else:
         features["monthly_breakdown"] = {}
         features["avg_monthly_income"] = None
         features["avg_monthly_expenses"] = None
         features["net_monthly_surplus"] = None
+        features["pos_purchases_total"] = 0.0
+        features["b2b_transfers_total"] = 0.0
+        features["monthly_avg_turnover"] = None
+        features["estimated_business_profit"] = None
 
     return {
         k: (_to_native(v) if not isinstance(v, (list, dict)) else v)
