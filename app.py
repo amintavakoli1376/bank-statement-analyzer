@@ -163,7 +163,7 @@ if submit_button:
             st.success("✅ تحلیل با موفقیت انجام شد!")
 
             # استخراج transactional_power_score از تحلیل تخصصی (فقط برای حساب تجاری)
-            if routing_result and routing_result.get("account_type") == "BUSINESS":
+            if routing_result:
                 final_result["transactional_power_score"] = routing_result.get("analysis", {}).get("transactional_power_score", "-")
 
             st.markdown("### 📋 خلاصه وضعیت مالی گردش حساب")

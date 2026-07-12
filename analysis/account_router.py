@@ -78,6 +78,7 @@ SALARIED_ANALYSIS_PROMPT = """
     "avg_monthly_salary": "میانگین حقوق ماهیانه به ریال",
     "net_monthly_surplus": "میانگین مازاد ماهیانه به ریال",
     "salary_regularity_status": "وضعیت منظم بودن حقوق",
+    "transactional_power_score": "امتیاز از ۱ تا ۱۰",
     "recommended_max_installments": {{
         "low_risk_tier": "قسط پیشنهادی محافظه‌کارانه (حداکثر 30 درصد حقوق) به ریال",
         "medium_risk_tier": "قسط پیشنهادی متعادل (حداکثر 50 درصد حقوق) به ریال",
@@ -101,6 +102,7 @@ PERSONAL_ANALYSIS_PROMPT = """
     "avg_monthly_income": "میانگین درآمد ماهیانه به ریال",
     "avg_monthly_expenses": "میانگین مخارج ماهیانه به ریال",
     "net_monthly_surplus": "میانگین مازاد ماهیانه به ریال",
+    "transactional_power_score": "امتیاز از ۱ تا ۱۰",
     "recommended_max_installments": {{
         "low_risk_tier": "قسط پیشنهادی محافظه‌کارانه (ریال)",
         "medium_risk_tier": "قسط پیشنهادی متعادل (ریال)",

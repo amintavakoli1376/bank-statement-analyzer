@@ -7,7 +7,7 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 response = requests.get(
   url="https://openrouter.ai/api/v1/key",
   headers={
-    "Authorization": f"Bearer {OPENROUTER_API_KEY}"
+    "Authorization": "Bearer sk-or-v1-049cac0e6180cff033baeef99f433c652c7cec8e3503b7"
   }
 )
 

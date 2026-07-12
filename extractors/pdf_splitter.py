@@ -68,10 +68,9 @@ def extract_page_data(file_bytes: bytes):
     """
     استخراج متن، تصویر یا جدول هر صفحه PDF.
 
-    سه حالت:
+    دو حالت:
       1. "camelot"          — جدول ساختاریافته قابل استخراج با Camelot
-      2. "llm_required"     — متن کافی موجود است
-      3. "image_required"   — صفحه تصویری/اسکن (نیاز به vision LLM)
+      2. "image_required"   — صفحه تصویری/اسکن (نیاز به vision LLM)
     """
     pages_data = []
     with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
@@ -101,25 +100,18 @@ def extract_page_data(file_bytes: bytes):
                     })
                     continue
 
-            # ─── اولویت دوم: متن یا تصویر ───
-            if len(effective_text) >= config.MIN_TEXT_LENGTH_FOR_IMAGE:
-                pages_data.append({
-                    "method": "llm_required",
-                    "page_number": page_num,
-                    "raw_text": effective_text,
-                })
-            else:
-                image_b64 = page_to_image_b64(page)
-                pages_data.append({
-                    "method": "image_required",
-                    "page_number": page_num,
-                    "image_b64": image_b64,
-                    "raw_text": effective_text,
-                })
+            # ─── اولویت دوم: فقط تصویر (حالت متنی حذف شد) ───
+            image_b64 = page_to_image_b64(page)
+            pages_data.append({
+                "method": "image_required",
+                "page_number": page_num,
+                "image_b64": image_b64,
+                "raw_text": effective_text,
+            })
 
     # لاگ خلاصه‌ی روش استخراج هر صفحه
     print(f"📖 [splitter] استخراج کامل شد:")
-    labels = {"camelot": "📊 جدولی", "llm_required": "📝 متنی", "image_required": "🖼️ تصویری"}
+    labels = {"camelot": "📊 جدولی", "image_required": "🖼️ تصویری"}
     for p in pages_data:
         len_text = len(p.get("raw_text", ""))
         label = labels.get(p["method"], p["method"])
@@ -229,17 +221,15 @@ def split_pages_with_context(pages_data, overlap_lines: int = 2):
         else:
             start_page = group[0]["page_number"]
             end_page = group[-1]["page_number"]
-            method = "image_required" if images_b64 else "llm_required"
             chunk = {
                 "page_number": start_page,
                 "page_range": f"{start_page}-{end_page}",
-                "method": method,
+                "method": "image_required",
                 "text": chunk_text,
                 "raw_length": len(chunk_text),
                 "page_count": len(group),
+                "images_b64": images_b64,
             }
-            if images_b64:
-                chunk["images_b64"] = images_b64
             chunks.append(chunk)
 
     # مرتب‌سازی chunks بر اساس page_number اولین صفحه
@@ -251,8 +241,6 @@ def split_pages_with_context(pages_data, overlap_lines: int = 2):
         if c["method"] == "image_required":
             n_imgs = len(c.get("images_b64", []))
             print(f"   chunk صفحات {c['page_range']}: 🖼️ {n_imgs} تصویر + متن ({c.get('raw_length', 0)} کاراکتر)")
-        elif c["method"] == "llm_required":
-            print(f"   chunk صفحات {c['page_range']}: 📝 متنی ({c['page_count']} صفحه، {c.get('raw_length', 0)} کاراکتر)")
         else:
             print(f"   chunk صفحه {c['page_number']}: 📊 جدولی (camelot)")
     print()

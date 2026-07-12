@@ -298,27 +298,22 @@ def extract_single_page(chunk, api_key: str, file_hash: str = None) -> PageExtra
     """
     استخراج تراکنش‌های یک chunk (ممکن است شامل چند صفحه باشد).
 
-    سه حالت:
+    دو حالت:
       1. "camelot"          — جدول → پردازش مستقیم (بدون LLM)
-      2. "llm_required"     — متن → LLM
-      3. "image_required"   — تصویر → vision LLM
+      2. "image_required"   — تصویر → vision LLM
     """
-    method = chunk.get("method", "llm_required")
+    method = chunk.get("method", "image_required")
 
     # حالت جدول Camelot — بدون نیاز به LLM
     if method == "camelot":
         return _extract_with_camelot(chunk, api_key, file_hash)
 
-    # حالت متنی
-    if method == "llm_required":
-        return _extract_with_llm_text(chunk, api_key, file_hash)
-
     # حالت تصویری
     if method == "image_required":
         return _extract_with_llm_image(chunk, api_key, file_hash)
 
-    # پیش‌فرض: متنی
-    return _extract_with_llm_text(chunk, api_key, file_hash)
+    # پیش‌فرض: تصویری
+    return _extract_with_llm_image(chunk, api_key, file_hash)
 
 
 # ─── استخراج موازی تمام chunks ────────────────────────────────────────────────
