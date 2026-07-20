@@ -1,0 +1,158 @@
+{
+  "page_number": 93,
+  "account_holder_name": null,
+  "transactions": [
+    {
+      "date": "1405/04/22",
+      "time": "09:04:57",
+      "description": "ح بانک ملت از کارت ۳۲۸۳ خودپرداز",
+      "deposit": 0.0,
+      "withdrawal": 15000450.0,
+      "balance": 201738357.0,
+      "source_page": 93,
+      "row_order": 0
+    },
+    {
+      "date": "1405/04/22",
+      "time": "09:21:44",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 55000.0,
+      "balance": 201683357.0,
+      "source_page": 93,
+      "row_order": 1
+    },
+    {
+      "date": "1405/04/22",
+      "time": "10:52:18",
+      "description": "ح.ا. حقیقی۵۷۵۳۶۸۳۳۱۴",
+      "deposit": 0.0,
+      "withdrawal": 200000450.0,
+      "balance": 1682907.0,
+      "source_page": 93,
+      "row_order": 2
+    },
+    {
+      "date": "1405/04/23",
+      "time": "04:32:17",
+      "description": "حواله شابرک ۰۵۰۴۲۳۰۳۱۱۰۰۰۰۰۰۰۰۳۹",
+      "deposit": 111700000.0,
+      "withdrawal": 0.0,
+      "balance": 113382907.0,
+      "source_page": 93,
+      "row_order": 3
+    },
+    {
+      "date": "1405/04/23",
+      "time": "04:37:25",
+      "description": "حواله شابرک ۰۵۰۴۲۳۰۳۱۱۰۰۰۰۰۰۰۰۲۶",
+      "deposit": 52600000.0,
+      "withdrawal": 0.0,
+      "balance": 165982907.0,
+      "source_page": 93,
+      "row_order": 4
+    },
+    {
+      "date": "1405/04/23",
+      "time": "05:44:32",
+      "description": "کارمزد ۲ حواله سرجمع خرید شابرک",
+      "deposit": 0.0,
+      "withdrawal": 44290.0,
+      "balance": 165938617.0,
+      "source_page": 93,
+      "row_order": 5
+    },
+    {
+      "date": "1405/04/23",
+      "time": "10:15:24",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 5000000.0,
+      "balance": 160938617.0,
+      "source_page": 93,
+      "row_order": 6
+    },
+    {
+      "date": "1405/04/23",
+      "time": "12:20:01",
+      "description": "ح.ا. حقیقی۴۷۸۷۳۲۷۳۰۹",
+      "deposit": 0.0,
+      "withdrawal": 10200450.0,
+      "balance": 150738167.0,
+      "source_page": 93,
+      "row_order": 7
+    },
+    {
+      "date": "1405/04/23",
+      "time": "12:23:48",
+      "description": "ح.ا. حقیقی۴۷۸۷۳۲۷۳۰۹",
+      "deposit": 0.0,
+      "withdrawal": 91800450.0,
+      "balance": 58937717.0,
+      "source_page": 93,
+      "row_order": 8
+    },
+    {
+      "date": "1405/04/23",
+      "time": "21:06:29",
+      "description": "خرید از پوز آسان پرداخت پرشین",
+      "deposit": 0.0,
+      "withdrawal": 2640000.0,
+      "balance": 56297717.0,
+      "source_page": 94,
+      "row_order": 9
+    },
+    {
+      "date": "1405/04/23",
+      "time": "21:17:03",
+      "description": "خرید از پوز پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 2500000.0,
+      "balance": 53797717.0,
+      "source_page": 94,
+      "row_order": 10
+    },
+    {
+      "date": "1405/04/24",
+      "time": "04:39:48",
+      "description": "حواله شابرک ۰۵۰۴۲۳۰۳۱۱۰۰۰۰۰۰۰۰۳۹",
+      "deposit": 99950000.0,
+      "withdrawal": 0.0,
+      "balance": 153747717.0,
+      "source_page": 94,
+      "row_order": 11
+    },
+    {
+      "date": "1405/04/24",
+      "time": "05:38:48",
+      "description": "کارمزد ۱ حواله سرجمع خرید شابرک",
+      "deposit": 0.0,
+      "withdrawal": 25400.0,
+      "balance": 153722317.0,
+      "source_page": 94,
+      "row_order": 12
+    },
+    {
+      "date": "1405/04/24",
+      "time": "15:56:23",
+      "description": "خرید از پوز سایان کارت",
+      "deposit": 0.0,
+      "withdrawal": 85000.0,
+      "balance": 153637317.0,
+      "source_page": 94,
+      "row_order": 13
+    },
+    {
+      "date": "1405/04/24",
+      "time": "21:23:02",
+      "description": "خرید از پوز تجارت الکترونیک پارسیان",
+      "deposit": 0.0,
+      "withdrawal": 2200000.0,
+      "balance": 151437317.0,
+      "source_page": 94,
+      "row_order": 14
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "استخراج تصویری از صفحات 93-94 (2 تصویر)"
+}

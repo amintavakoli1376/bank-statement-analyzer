@@ -1,0 +1,368 @@
+{
+  "page_number": 57,
+  "account_holder_name": null,
+  "transactions": [
+    {
+      "date": "1405/03/07",
+      "time": "09:35:39",
+      "description": "کارت به کارت از 3283 اینترنت بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 49021800.0,
+      "balance": 310420069.0,
+      "source_page": 57,
+      "row_order": 0
+    },
+    {
+      "date": "1405/03/07",
+      "time": "10:22:02",
+      "description": "ح.ا حقیقی 22505920 رجبی مجید",
+      "deposit": 0.0,
+      "withdrawal": 3500450.0,
+      "balance": 306919619.0,
+      "source_page": 57,
+      "row_order": 1
+    },
+    {
+      "date": "1405/03/07",
+      "time": "12:36:57",
+      "description": "پرداخت قبض از به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 500000.0,
+      "balance": 306419619.0,
+      "source_page": 57,
+      "row_order": 2
+    },
+    {
+      "date": "1405/03/07",
+      "time": "13:02:34",
+      "description": "پرداخت قبض از پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 500000.0,
+      "balance": 305919619.0,
+      "source_page": 57,
+      "row_order": 3
+    },
+    {
+      "date": "1405/03/07",
+      "time": "13:32:13",
+      "description": "خرید از پوز پرداخت الکترونیک سداد",
+      "deposit": 0.0,
+      "withdrawal": 810000.0,
+      "balance": 305109619.0,
+      "source_page": 57,
+      "row_order": 4
+    },
+    {
+      "date": "1405/03/07",
+      "time": "20:33:42",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 360000.0,
+      "balance": 304749619.0,
+      "source_page": 57,
+      "row_order": 5
+    },
+    {
+      "date": "1405/03/07",
+      "time": "23:47:46",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 500000.0,
+      "balance": 304249619.0,
+      "source_page": 57,
+      "row_order": 6
+    },
+    {
+      "date": "1405/03/07",
+      "time": "23:48:31",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 2420000.0,
+      "balance": 301829619.0,
+      "source_page": 57,
+      "row_order": 7
+    },
+    {
+      "date": "1405/03/08",
+      "time": "13:40:10",
+      "description": "حواله شاپرک 05030703110000000039",
+      "deposit": 148400000.0,
+      "withdrawal": 0.0,
+      "balance": 450229619.0,
+      "source_page": 57,
+      "row_order": 8
+    },
+    {
+      "date": "1405/03/08",
+      "time": "13:41:14",
+      "description": "حواله شاپرک 05030703110000000026",
+      "deposit": 65450000.0,
+      "withdrawal": 0.0,
+      "balance": 515679619.0,
+      "source_page": 58,
+      "row_order": 9
+    },
+    {
+      "date": "1405/03/08",
+      "time": "14:50:14",
+      "description": "کارمزد 2 حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 49580.0,
+      "balance": 515630039.0,
+      "source_page": 58,
+      "row_order": 10
+    },
+    {
+      "date": "1405/03/08",
+      "time": "20:19:29",
+      "description": "خرید از پوز کارت اعتباری ایران کیش",
+      "deposit": 0.0,
+      "withdrawal": 9600000.0,
+      "balance": 506030039.0,
+      "source_page": 58,
+      "row_order": 11
+    },
+    {
+      "date": "1405/03/09",
+      "time": "08:39:14",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 1150000.0,
+      "balance": 504880039.0,
+      "source_page": 58,
+      "row_order": 12
+    },
+    {
+      "date": "1405/03/09",
+      "time": "10:15:21",
+      "description": "کارت به کارت از 3283 اینترنت بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 100037800.0,
+      "balance": 404842239.0,
+      "source_page": 58,
+      "row_order": 13
+    },
+    {
+      "date": "1405/03/09",
+      "time": "17:16:33",
+      "description": "پرداخت قبض از پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 500000.0,
+      "balance": 404342239.0,
+      "source_page": 58,
+      "row_order": 14
+    },
+    {
+      "date": "1405/03/09",
+      "time": "20:51:27",
+      "description": "خرید از پوز تجارت الکترونیک پاسارگاد",
+      "deposit": 0.0,
+      "withdrawal": 13200000.0,
+      "balance": 391142239.0,
+      "source_page": 58,
+      "row_order": 15
+    },
+    {
+      "date": "1405/03/10",
+      "time": "04:28:59",
+      "description": "حواله شاپرک 05030903110000000026",
+      "deposit": 71950000.0,
+      "withdrawal": 0.0,
+      "balance": 463092239.0,
+      "source_page": 58,
+      "row_order": 16
+    },
+    {
+      "date": "1405/03/10",
+      "time": "04:42:06",
+      "description": "حواله شاپرک 05030903110000000039",
+      "deposit": 57970000.0,
+      "withdrawal": 0.0,
+      "balance": 521062239.0,
+      "source_page": 58,
+      "row_order": 17
+    },
+    {
+      "date": "1405/03/10",
+      "time": "05:30:51",
+      "description": "کارمزد 2 حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 39220.0,
+      "balance": 521023019.0,
+      "source_page": 59,
+      "row_order": 18
+    },
+    {
+      "date": "1405/03/10",
+      "time": "09:00:05",
+      "description": "ح.ا حقیقی 8712028677 عبدالحسین شهرآبادی",
+      "deposit": 0.0,
+      "withdrawal": 350000450.0,
+      "balance": 171022569.0,
+      "source_page": 59,
+      "row_order": 19
+    },
+    {
+      "date": "1405/03/10",
+      "time": "11:04:47",
+      "description": "برداشت بابت کسر کارمزد",
+      "deposit": 0.0,
+      "withdrawal": 70952.0,
+      "balance": 170951617.0,
+      "source_page": 59,
+      "row_order": 20
+    },
+    {
+      "date": "1405/03/10",
+      "time": "18:30:56",
+      "description": "ح بانک ملت از کارت 3283 اینترنت بانک",
+      "deposit": 0.0,
+      "withdrawal": 2300450.0,
+      "balance": 168651167.0,
+      "source_page": 59,
+      "row_order": 21
+    },
+    {
+      "date": "1405/03/10",
+      "time": "21:31:48",
+      "description": "خرید از پوز تجارت الکترونیک پاسارگاد",
+      "deposit": 0.0,
+      "withdrawal": 3500000.0,
+      "balance": 165151167.0,
+      "source_page": 59,
+      "row_order": 22
+    },
+    {
+      "date": "1405/03/10",
+      "time": "21:34:03",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1850000.0,
+      "balance": 163301167.0,
+      "source_page": 59,
+      "row_order": 23
+    },
+    {
+      "date": "1405/03/10",
+      "time": "22:00:38",
+      "description": "خرید از پوز کارت اعتباری ایران کیش",
+      "deposit": 0.0,
+      "withdrawal": 500000.0,
+      "balance": 162801167.0,
+      "source_page": 59,
+      "row_order": 24
+    },
+    {
+      "date": "1405/03/10",
+      "time": "22:04:12",
+      "description": "خرید از پوز پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 6300000.0,
+      "balance": 156501167.0,
+      "source_page": 59,
+      "row_order": 25
+    },
+    {
+      "date": "1405/03/10",
+      "time": "22:28:06",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 13500000.0,
+      "balance": 143001167.0,
+      "source_page": 59,
+      "row_order": 26
+    },
+    {
+      "date": "1405/03/11",
+      "time": "04:39:04",
+      "description": "حواله شاپرک 05031003110000000026",
+      "deposit": 17500000.0,
+      "withdrawal": 0.0,
+      "balance": 160501167.0,
+      "source_page": 60,
+      "row_order": 27
+    },
+    {
+      "date": "1405/03/11",
+      "time": "04:41:03",
+      "description": "حواله شاپرک 05031003110000000039",
+      "deposit": 255645000.0,
+      "withdrawal": 0.0,
+      "balance": 416146167.0,
+      "source_page": 60,
+      "row_order": 28
+    },
+    {
+      "date": "1405/03/11",
+      "time": "05:34:40",
+      "description": "کارمزد 2 حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 69860.0,
+      "balance": 416076307.0,
+      "source_page": 60,
+      "row_order": 29
+    },
+    {
+      "date": "1405/03/11",
+      "time": "06:34:11",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 415076307.0,
+      "source_page": 60,
+      "row_order": 30
+    },
+    {
+      "date": "1405/03/11",
+      "time": "10:32:07",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 70000000.0,
+      "balance": 345076307.0,
+      "source_page": 60,
+      "row_order": 31
+    },
+    {
+      "date": "1405/03/11",
+      "time": "11:34:46",
+      "description": "ح بانک ملت از کارت 3283 اینترنت بانک",
+      "deposit": 0.0,
+      "withdrawal": 25500450.0,
+      "balance": 319575857.0,
+      "source_page": 60,
+      "row_order": 32
+    },
+    {
+      "date": "1405/03/11",
+      "time": "12:54:34",
+      "description": "کارت به کارت از 3283 اینترنت بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 37018600.0,
+      "balance": 282557257.0,
+      "source_page": 60,
+      "row_order": 33
+    },
+    {
+      "date": "1405/03/11",
+      "time": "12:55:57",
+      "description": "کارت به کارت از 3283 اینترنت بانک ملت",
+      "deposit": 0.0,
+      "withdrawal": 2509000.0,
+      "balance": 280048257.0,
+      "source_page": 60,
+      "row_order": 34
+    },
+    {
+      "date": "1405/03/11",
+      "time": "13:17:19",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 3000000.0,
+      "balance": 277048257.0,
+      "source_page": 60,
+      "row_order": 35
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "استخراج تصویری از صفحات 57-60 (4 تصویر)"
+}

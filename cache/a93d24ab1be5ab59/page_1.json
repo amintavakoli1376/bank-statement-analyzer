@@ -1,0 +1,698 @@
+{
+  "page_number": 1,
+  "account_holder_name": "رضا بیدگلی",
+  "transactions": [
+    {
+      "date": "1405/04/26",
+      "time": "13:31:21",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 10200000.0,
+      "balance": 16849839.0,
+      "source_page": 1,
+      "row_order": 0
+    },
+    {
+      "date": "1405/04/26",
+      "time": "13:24:39",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 35800000.0,
+      "balance": 27049839.0,
+      "source_page": 1,
+      "row_order": 1
+    },
+    {
+      "date": "1405/04/25",
+      "time": "20:06:01",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 12500000.0,
+      "withdrawal": 0.0,
+      "balance": 62849839.0,
+      "source_page": 1,
+      "row_order": 2
+    },
+    {
+      "date": "1405/04/25",
+      "time": "12:00:22",
+      "description": "انتقالي ازكارت",
+      "deposit": 15000000.0,
+      "withdrawal": 0.0,
+      "balance": 50349839.0,
+      "source_page": 1,
+      "row_order": 3
+    },
+    {
+      "date": "1405/04/25",
+      "time": "11:07:43",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 16000000.0,
+      "withdrawal": 0.0,
+      "balance": 35349839.0,
+      "source_page": 1,
+      "row_order": 4
+    },
+    {
+      "date": "1405/04/24",
+      "time": "21:27:50",
+      "description": "انتقالي ازكارت",
+      "deposit": 17500000.0,
+      "withdrawal": 0.0,
+      "balance": 19349839.0,
+      "source_page": 1,
+      "row_order": 5
+    },
+    {
+      "date": "1405/04/24",
+      "time": "18:26:30",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 17300000.0,
+      "balance": 1849839.0,
+      "source_page": 1,
+      "row_order": 6
+    },
+    {
+      "date": "1405/04/24",
+      "time": "10:43:35",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 500000.0,
+      "balance": 19149839.0,
+      "source_page": 1,
+      "row_order": 7
+    },
+    {
+      "date": "1405/04/24",
+      "time": "09:00:24",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 4050000.0,
+      "balance": 19649839.0,
+      "source_page": 1,
+      "row_order": 8
+    },
+    {
+      "date": "1405/04/23",
+      "time": "21:14:47",
+      "description": "پرداخت قبض",
+      "deposit": 0.0,
+      "withdrawal": 1781000.0,
+      "balance": 23699839.0,
+      "source_page": 1,
+      "row_order": 9
+    },
+    {
+      "date": "1405/04/22",
+      "time": "18:45:04",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 1350000.0,
+      "balance": 32689839.0,
+      "source_page": 1,
+      "row_order": 10
+    },
+    {
+      "date": "1405/04/22",
+      "time": "18:32:01",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2000000.0,
+      "balance": 34039839.0,
+      "source_page": 1,
+      "row_order": 11
+    },
+    {
+      "date": "1405/04/22",
+      "time": "18:21:31",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 7000000.0,
+      "balance": 36039839.0,
+      "source_page": 1,
+      "row_order": 12
+    },
+    {
+      "date": "1405/04/22",
+      "time": "18:20:27",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 5000000.0,
+      "balance": 43039839.0,
+      "source_page": 1,
+      "row_order": 13
+    },
+    {
+      "date": "1405/04/22",
+      "time": "17:55:06",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 23200000.0,
+      "balance": 48039839.0,
+      "source_page": 1,
+      "row_order": 14
+    },
+    {
+      "date": "1405/04/22",
+      "time": "09:24:54",
+      "description": "اصلاحيه",
+      "deposit": 7700000.0,
+      "withdrawal": 0.0,
+      "balance": 71239839.0,
+      "source_page": 1,
+      "row_order": 15
+    },
+    {
+      "date": "1405/04/22",
+      "time": "09:04:59",
+      "description": "خريد اينترنتي",
+      "deposit": 0.0,
+      "withdrawal": 7700000.0,
+      "balance": 63539839.0,
+      "source_page": 1,
+      "row_order": 16
+    },
+    {
+      "date": "1405/04/21",
+      "time": "18:35:28",
+      "description": "انتقال از کارت - شتاب",
+      "deposit": 0.0,
+      "withdrawal": 35018600.0,
+      "balance": 64030839.0,
+      "source_page": 2,
+      "row_order": 17
+    },
+    {
+      "date": "1405/04/21",
+      "time": "12:59:59",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2100000.0,
+      "balance": 99049439.0,
+      "source_page": 2,
+      "row_order": 18
+    },
+    {
+      "date": "1405/04/20",
+      "time": "13:44:09",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 1020000.0,
+      "balance": 101149439.0,
+      "source_page": 2,
+      "row_order": 19
+    },
+    {
+      "date": "1405/04/20",
+      "time": "13:29:53",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 495000.0,
+      "balance": 102169439.0,
+      "source_page": 2,
+      "row_order": 20
+    },
+    {
+      "date": "1405/04/20",
+      "time": "12:59:59",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 100000000.0,
+      "withdrawal": 0.0,
+      "balance": 102664439.0,
+      "source_page": 2,
+      "row_order": 21
+    },
+    {
+      "date": "1405/04/19",
+      "time": "20:19:38",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 1728000.0,
+      "balance": 2664439.0,
+      "source_page": 2,
+      "row_order": 22
+    },
+    {
+      "date": "1405/04/19",
+      "time": "18:56:46",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 350000.0,
+      "balance": 4392439.0,
+      "source_page": 2,
+      "row_order": 23
+    },
+    {
+      "date": "1405/04/18",
+      "time": "12:57:01",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 300000.0,
+      "balance": 4742439.0,
+      "source_page": 2,
+      "row_order": 24
+    },
+    {
+      "date": "1405/04/18",
+      "time": "12:51:35",
+      "description": "اصلاحيه پرداخت اينترنتي",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 5042439.0,
+      "source_page": 2,
+      "row_order": 25
+    },
+    {
+      "date": "1405/04/18",
+      "time": "12:49:38",
+      "description": "اصلاحيه پرداخت اينترنتي",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 6042439.0,
+      "source_page": 2,
+      "row_order": 26
+    },
+    {
+      "date": "1405/04/17",
+      "time": "10:48:30",
+      "description": "انتقالي ازكارت",
+      "deposit": 6000000.0,
+      "withdrawal": 0.0,
+      "balance": 7042439.0,
+      "source_page": 2,
+      "row_order": 27
+    },
+    {
+      "date": "1405/04/14",
+      "time": "10:03:12",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2000000.0,
+      "balance": 1042439.0,
+      "source_page": 2,
+      "row_order": 28
+    },
+    {
+      "date": "1405/04/13",
+      "time": "10:34:32",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 650000.0,
+      "balance": 3042439.0,
+      "source_page": 2,
+      "row_order": 29
+    },
+    {
+      "date": "1405/04/13",
+      "time": "10:32:34",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 200000.0,
+      "balance": 3692439.0,
+      "source_page": 2,
+      "row_order": 30
+    },
+    {
+      "date": "1405/04/12",
+      "time": "20:55:07",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 945000.0,
+      "balance": 3892439.0,
+      "source_page": 2,
+      "row_order": 31
+    },
+    {
+      "date": "1405/04/12",
+      "time": "19:07:54",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 1260000.0,
+      "balance": 4837439.0,
+      "source_page": 2,
+      "row_order": 32
+    },
+    {
+      "date": "1405/04/06",
+      "time": "09:35:35",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2217000.0,
+      "balance": 272619415.0,
+      "source_page": 2,
+      "row_order": 33
+    },
+    {
+      "date": "1405/03/23",
+      "time": "08:25:38",
+      "description": "انتقال از کارت - شتاب",
+      "deposit": 0.0,
+      "withdrawal": 7209000.0,
+      "balance": 1019472065.0,
+      "source_page": 2,
+      "row_order": 34
+    },
+    {
+      "date": "1405/03/22",
+      "time": "11:32:02",
+      "description": "انتقالي به كارت",
+      "deposit": 0.0,
+      "withdrawal": 9000450.0,
+      "balance": 1026681065.0,
+      "source_page": 2,
+      "row_order": 35
+    },
+    {
+      "date": "1405/03/22",
+      "time": "11:02:37",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 22800000.0,
+      "balance": 1035681515.0,
+      "source_page": 2,
+      "row_order": 36
+    },
+    {
+      "date": "1405/03/22",
+      "time": "11:00:00",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 1058481515.0,
+      "source_page": 2,
+      "row_order": 37
+    },
+    {
+      "date": "1405/03/22",
+      "time": "10:45:49",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 11800000.0,
+      "balance": 1059481515.0,
+      "source_page": 2,
+      "row_order": 38
+    },
+    {
+      "date": "1405/03/21",
+      "time": "13:14:46",
+      "description": "انتقالي ازكارت",
+      "deposit": 21000000.0,
+      "withdrawal": 0.0,
+      "balance": 1071281515.0,
+      "source_page": 2,
+      "row_order": 39
+    },
+    {
+      "date": "1405/03/21",
+      "time": "08:05:12",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 550000.0,
+      "balance": 1050281515.0,
+      "source_page": 3,
+      "row_order": 40
+    },
+    {
+      "date": "1405/03/21",
+      "time": "08:03:29",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 160500.0,
+      "balance": 1050831515.0,
+      "source_page": 3,
+      "row_order": 41
+    },
+    {
+      "date": "1405/03/20",
+      "time": "13:30:28",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 47805038.0,
+      "balance": 1050992015.0,
+      "source_page": 3,
+      "row_order": 42
+    },
+    {
+      "date": "1405/03/20",
+      "time": "12:16:26",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 25000000.0,
+      "withdrawal": 0.0,
+      "balance": 1098797053.0,
+      "source_page": 3,
+      "row_order": 43
+    },
+    {
+      "date": "1405/03/20",
+      "time": "12:14:48",
+      "description": "انتقال از کارت - شتاب",
+      "deposit": 0.0,
+      "withdrawal": 25015400.0,
+      "balance": 1073797053.0,
+      "source_page": 3,
+      "row_order": 44
+    },
+    {
+      "date": "1405/03/19",
+      "time": "19:26:09",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 20000000.0,
+      "balance": 1098812453.0,
+      "source_page": 3,
+      "row_order": 45
+    },
+    {
+      "date": "1405/03/19",
+      "time": "13:54:35",
+      "description": "انتقال از کارت - شتاب",
+      "deposit": 0.0,
+      "withdrawal": 90034600.0,
+      "balance": 1118812453.0,
+      "source_page": 3,
+      "row_order": 46
+    },
+    {
+      "date": "1405/03/19",
+      "time": "13:36:24",
+      "description": "انتقالي ازكارت",
+      "deposit": 11000000.0,
+      "withdrawal": 0.0,
+      "balance": 1208847053.0,
+      "source_page": 3,
+      "row_order": 47
+    },
+    {
+      "date": "1405/03/18",
+      "time": "12:54:12",
+      "description": "انتقال از کارت - شتاب",
+      "deposit": 0.0,
+      "withdrawal": 20012200.0,
+      "balance": 1197847053.0,
+      "source_page": 3,
+      "row_order": 48
+    },
+    {
+      "date": "1405/03/18",
+      "time": "10:10:07",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 4850000.0,
+      "balance": 1217859253.0,
+      "source_page": 3,
+      "row_order": 49
+    },
+    {
+      "date": "1405/03/18",
+      "time": "09:24:56",
+      "description": "پرداخت قسط",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 1222709253.0,
+      "source_page": 3,
+      "row_order": 50
+    },
+    {
+      "date": "1405/03/18",
+      "time": "09:24:28",
+      "description": "پرداخت قسط",
+      "deposit": 0.0,
+      "withdrawal": 33500000.0,
+      "balance": 1223709253.0,
+      "source_page": 3,
+      "row_order": 51
+    },
+    {
+      "date": "1405/03/18",
+      "time": "09:22:20",
+      "description": "اصلاحيه",
+      "deposit": 335000000.0,
+      "withdrawal": 0.0,
+      "balance": 1257209253.0,
+      "source_page": 3,
+      "row_order": 52
+    },
+    {
+      "date": "1405/03/18",
+      "time": "09:22:18",
+      "description": "پرداخت قسط",
+      "deposit": 0.0,
+      "withdrawal": 335000000.0,
+      "balance": 922209253.0,
+      "source_page": 3,
+      "row_order": 53
+    },
+    {
+      "date": "1405/03/18",
+      "time": "09:08:10",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 35000000.0,
+      "withdrawal": 0.0,
+      "balance": 1257209253.0,
+      "source_page": 3,
+      "row_order": 54
+    },
+    {
+      "date": "1405/03/17",
+      "time": "13:04:03",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 72000000.0,
+      "withdrawal": 0.0,
+      "balance": 1222209253.0,
+      "source_page": 4,
+      "row_order": 55
+    },
+    {
+      "date": "1405/03/17",
+      "time": "08:39:21",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 5900000.0,
+      "balance": 1150209253.0,
+      "source_page": 4,
+      "row_order": 56
+    },
+    {
+      "date": "1405/03/16",
+      "time": "19:21:00",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2800000.0,
+      "balance": 1156109253.0,
+      "source_page": 4,
+      "row_order": 57
+    },
+    {
+      "date": "1405/03/16",
+      "time": "19:15:59",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 5500000.0,
+      "balance": 1158909253.0,
+      "source_page": 4,
+      "row_order": 58
+    },
+    {
+      "date": "1405/03/16",
+      "time": "19:14:49",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 10000000.0,
+      "balance": 1164409253.0,
+      "source_page": 4,
+      "row_order": 59
+    },
+    {
+      "date": "1405/03/16",
+      "time": "18:58:29",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 22800000.0,
+      "balance": 1174409253.0,
+      "source_page": 4,
+      "row_order": 60
+    },
+    {
+      "date": "1405/03/16",
+      "time": "18:56:32",
+      "description": "انتقال به کارت - شتاب",
+      "deposit": 40000000.0,
+      "withdrawal": 0.0,
+      "balance": 1197209253.0,
+      "source_page": 4,
+      "row_order": 61
+    },
+    {
+      "date": "1405/03/16",
+      "time": "18:40:44",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 14300000.0,
+      "balance": 1157209253.0,
+      "source_page": 4,
+      "row_order": 62
+    },
+    {
+      "date": "1405/03/16",
+      "time": "17:35:38",
+      "description": "پرداخت لحظه اي - پل (۸۸۹۳) حواله پل",
+      "deposit": 5000000.0,
+      "withdrawal": 0.0,
+      "balance": 1171509253.0,
+      "source_page": 4,
+      "row_order": 63
+    },
+    {
+      "date": "1405/03/16",
+      "time": "14:11:44",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2600000.0,
+      "balance": 1166509253.0,
+      "source_page": 4,
+      "row_order": 64
+    },
+    {
+      "date": "1405/03/16",
+      "time": "14:05:18",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 1400000.0,
+      "balance": 1169109253.0,
+      "source_page": 4,
+      "row_order": 65
+    },
+    {
+      "date": "1405/03/16",
+      "time": "11:23:31",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 2700000.0,
+      "balance": 1170509253.0,
+      "source_page": 4,
+      "row_order": 66
+    },
+    {
+      "date": "1405/03/14",
+      "time": "13:43:56",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 4464310.0,
+      "balance": 1173209253.0,
+      "source_page": 4,
+      "row_order": 67
+    },
+    {
+      "date": "1405/03/14",
+      "time": "13:40:29",
+      "description": "برداشت با POS",
+      "deposit": 0.0,
+      "withdrawal": 12190000.0,
+      "balance": 1177673563.0,
+      "source_page": 4,
+      "row_order": 68
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "استخراج تصویری از صفحات 1-4 (4 تصویر)"
+}

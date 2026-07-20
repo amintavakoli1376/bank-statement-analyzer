@@ -1,0 +1,578 @@
+{
+  "page_number": 13,
+  "account_holder_name": null,
+  "transactions": [
+    {
+      "date": "1404/12/07",
+      "time": "10:23",
+      "description": "انتقال MOB انتقال به حساب 1066932361 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 92000000.0,
+      "balance": 13829650.0,
+      "source_page": 13,
+      "row_order": 0
+    },
+    {
+      "date": "1404/12/07",
+      "time": "10:23",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 13829200.0,
+      "source_page": 13,
+      "row_order": 1
+    },
+    {
+      "date": "1404/12/07",
+      "time": "10:48",
+      "description": "انتقال MOB انتقال از حساب 1042802678 شرح: 06-",
+      "deposit": 720000000.0,
+      "withdrawal": 0.0,
+      "balance": 733829200.0,
+      "source_page": 13,
+      "row_order": 2
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:06",
+      "description": "انتقال MOB انتقال از حساب 1076259856",
+      "deposit": 500000000.0,
+      "withdrawal": 0.0,
+      "balance": 1233829200.0,
+      "source_page": 13,
+      "row_order": 3
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:10",
+      "description": "انتقال از حساب 600268 شرح: -140412070162048099ACH حسن سرتک زاده نام واریز کننده: مهدي عزت پور کد پیگیری: 140412070162048099",
+      "deposit": 1000000000.0,
+      "withdrawal": 0.0,
+      "balance": 2233829200.0,
+      "source_page": 13,
+      "row_order": 4
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:29",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162053695 همراه بانک ممتاز فرهمند نام واریز کننده: 1-واریز حقوق کد پیگیری: 180190000000210518199008",
+      "deposit": 0.0,
+      "withdrawal": 97000000.0,
+      "balance": 2136829200.0,
+      "source_page": 13,
+      "row_order": 5
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:29",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 9700.0,
+      "balance": 2136819500.0,
+      "source_page": 13,
+      "row_order": 6
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:30",
+      "description": "انتقال MOB انتقال به حساب 927246261 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 95000000.0,
+      "balance": 2041819500.0,
+      "source_page": 13,
+      "row_order": 7
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:30",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 2041819050.0,
+      "source_page": 13,
+      "row_order": 8
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:31",
+      "description": "انتقال MOB انتقال به حساب 1033738850 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 279000000.0,
+      "balance": 1762819050.0,
+      "source_page": 13,
+      "row_order": 9
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:31",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 1762818600.0,
+      "source_page": 13,
+      "row_order": 10
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:33",
+      "description": "انتقال MOB انتقال به حساب 444718299 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 64600000.0,
+      "balance": 1698218600.0,
+      "source_page": 13,
+      "row_order": 11
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:33",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 1698218150.0,
+      "source_page": 13,
+      "row_order": 12
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:34",
+      "description": "انتقال MOB انتقال به حساب 252714053 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 194000000.0,
+      "balance": 1504218150.0,
+      "source_page": 13,
+      "row_order": 13
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:34",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 1504217700.0,
+      "source_page": 13,
+      "row_order": 14
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:35",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162055043 همراه بانک علي ميرزايي نام واریز کننده: 1-واریز حقوق کد پیگیری: 290170000000112241722009",
+      "deposit": 0.0,
+      "withdrawal": 95000000.0,
+      "balance": 1409217700.0,
+      "source_page": 14,
+      "row_order": 15
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:35",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 9500.0,
+      "balance": 1409208200.0,
+      "source_page": 14,
+      "row_order": 16
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:36",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162055333 همراه بانک سيروس رنجبر نام واریز کننده: 1-واریز حقوق کد پیگیری: 670130100000000032818300",
+      "deposit": 0.0,
+      "withdrawal": 95000000.0,
+      "balance": 1314208200.0,
+      "source_page": 14,
+      "row_order": 17
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:36",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 9500.0,
+      "balance": 1314198700.0,
+      "source_page": 14,
+      "row_order": 18
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:37",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162055533 همراه بانک حسين ميرشکالي نام واریز کننده: 1-واریز حقوق کد پیگیری: 300180000000345995820085",
+      "deposit": 0.0,
+      "withdrawal": 190000000.0,
+      "balance": 1124198700.0,
+      "source_page": 14,
+      "row_order": 19
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:37",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 19000.0,
+      "balance": 1124179700.0,
+      "source_page": 14,
+      "row_order": 20
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:39",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162055887 همراه بانک طوبي ميرزاده اه نام واریز کننده: 1-واریز حقوق کد پیگیری: 770120000000008784632408",
+      "deposit": 0.0,
+      "withdrawal": 217000000.0,
+      "balance": 907179700.0,
+      "source_page": 14,
+      "row_order": 21
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:39",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 21700.0,
+      "balance": 907158000.0,
+      "source_page": 14,
+      "row_order": 22
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:40",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162056129 همراه بانک مجيد رفيعي چرمه نام واریز کننده: 1-واریز حقوق کد پیگیری: 460120020000008383073600",
+      "deposit": 0.0,
+      "withdrawal": 93000000.0,
+      "balance": 814158000.0,
+      "source_page": 14,
+      "row_order": 23
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:40",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 9300.0,
+      "balance": 814148700.0,
+      "source_page": 14,
+      "row_order": 24
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:41",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162056324 همراه بانک رضا صالحي نام واریز کننده: 1-واریز حقوق کد پیگیری: 520120020000008566435405",
+      "deposit": 0.0,
+      "withdrawal": 97000000.0,
+      "balance": 717148700.0,
+      "source_page": 14,
+      "row_order": 25
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:41",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 9700.0,
+      "balance": 717139000.0,
+      "source_page": 14,
+      "row_order": 26
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:42",
+      "description": "انتقال MOB انتقال به حساب 290887485 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 145500000.0,
+      "balance": 571639000.0,
+      "source_page": 15,
+      "row_order": 27
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:42",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 571638550.0,
+      "source_page": 15,
+      "row_order": 28
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:43",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162056916 همراه بانک احمد قديري نو نام واریز کننده: 1-واریز حقوق کد پیگیری: 980170000000115091835004",
+      "deposit": 0.0,
+      "withdrawal": 186000000.0,
+      "balance": 385638550.0,
+      "source_page": 15,
+      "row_order": 29
+    },
+    {
+      "date": "1404/12/07",
+      "time": "11:43",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 18600.0,
+      "balance": 385619950.0,
+      "source_page": 15,
+      "row_order": 30
+    },
+    {
+      "date": "1404/12/07",
+      "time": "12:57",
+      "description": "پایا انتقال به حساب 600326 شرح: |Ach 140412070162069803 همراه بانک داريوش حيدري نام واریز کننده: 1-واریز حقوق کد پیگیری: 930120010000007173172901",
+      "deposit": 0.0,
+      "withdrawal": 285000000.0,
+      "balance": 100619950.0,
+      "source_page": 15,
+      "row_order": 31
+    },
+    {
+      "date": "1404/12/07",
+      "time": "12:57",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 28500.0,
+      "balance": 100591450.0,
+      "source_page": 15,
+      "row_order": 32
+    },
+    {
+      "date": "1404/12/07",
+      "time": "14:04",
+      "description": "انتقال از حساب 600268 شرح: ACH1404120701620846329- زهرا قريشي نام واریز کننده: IR330160000000000998445751 کد پیگیری: 140412070162084632",
+      "deposit": 1000000000.0,
+      "withdrawal": 0.0,
+      "balance": 1100591450.0,
+      "source_page": 15,
+      "row_order": 33
+    },
+    {
+      "date": "1404/12/07",
+      "time": "15:34",
+      "description": "پایا انتقال به حساب 600304 شرح: |Ach 140412070162096602 همراه بانک بهروز نفري نام واریز کننده: 1-واریز حقوق کد پیگیری: 110190000000101205686009",
+      "deposit": 0.0,
+      "withdrawal": 97000000.0,
+      "balance": 1003591450.0,
+      "source_page": 15,
+      "row_order": 34
+    },
+    {
+      "date": "1404/12/07",
+      "time": "15:34",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 9700.0,
+      "balance": 1003581750.0,
+      "source_page": 15,
+      "row_order": 35
+    },
+    {
+      "date": "1404/12/07",
+      "time": "15:36",
+      "description": "پایا انتقال به حساب 600304 شرح: |Ach 140412070162096748 همراه بانک سعيد بهمني نام واریز کننده: 1-واریز حقوق کد پیگیری: 770120010000004245914561",
+      "deposit": 0.0,
+      "withdrawal": 221600000.0,
+      "balance": 781981750.0,
+      "source_page": 15,
+      "row_order": 36
+    },
+    {
+      "date": "1404/12/07",
+      "time": "15:36",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 22160.0,
+      "balance": 781959590.0,
+      "source_page": 15,
+      "row_order": 37
+    },
+    {
+      "date": "1404/12/07",
+      "time": "15:37",
+      "description": "انتقال MOB انتقال به حساب 723318579",
+      "deposit": 0.0,
+      "withdrawal": 100000000.0,
+      "balance": 681959590.0,
+      "source_page": 15,
+      "row_order": 38
+    },
+    {
+      "date": "1404/12/07",
+      "time": "15:37",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 681959140.0,
+      "source_page": 15,
+      "row_order": 39
+    },
+    {
+      "date": "1404/12/07",
+      "time": "16:26",
+      "description": "پایا انتقال به حساب 600291 شرح: |Ach 140412070162101780 همراه بانک ريوف معروف ز نام واریز کننده: 1-واریز حقوق کد پیگیری: 270190000000118149048007",
+      "deposit": 0.0,
+      "withdrawal": 13000000.0,
+      "balance": 668959140.0,
+      "source_page": 16,
+      "row_order": 40
+    },
+    {
+      "date": "1404/12/07",
+      "time": "16:26",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 3000.0,
+      "balance": 668956140.0,
+      "source_page": 16,
+      "row_order": 41
+    },
+    {
+      "date": "1404/12/07",
+      "time": "22:53",
+      "description": "پایا انتقال به حساب 600291 شرح: |Ach 140412070162137951 همراه بانک مهدي جوادي نام واریز کننده: 1-واریز حقوق کد پیگیری: 800120020000005059655496",
+      "deposit": 0.0,
+      "withdrawal": 30300000.0,
+      "balance": 638656140.0,
+      "source_page": 16,
+      "row_order": 42
+    },
+    {
+      "date": "1404/12/07",
+      "time": "22:53",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 3030.0,
+      "balance": 638653110.0,
+      "source_page": 16,
+      "row_order": 43
+    },
+    {
+      "date": "1404/12/08",
+      "time": "10:30",
+      "description": "پایا انتقال به حساب 600337 شرح: |Ach 140412080162160315 همراه بانک رضا رجب پورقهفر نام واریز کننده: 1-واریز حقوق کد پیگیری: 330120000000005921159929",
+      "deposit": 0.0,
+      "withdrawal": 320000000.0,
+      "balance": 318653110.0,
+      "source_page": 16,
+      "row_order": 44
+    },
+    {
+      "date": "1404/12/08",
+      "time": "10:30",
+      "description": "پایا",
+      "deposit": 0.0,
+      "withdrawal": 32000.0,
+      "balance": 318621110.0,
+      "source_page": 16,
+      "row_order": 45
+    },
+    {
+      "date": "1404/12/08",
+      "time": "10:31",
+      "description": "انتقال MOB انتقال به حساب 799012563 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 95000000.0,
+      "balance": 223621110.0,
+      "source_page": 16,
+      "row_order": 46
+    },
+    {
+      "date": "1404/12/08",
+      "time": "10:31",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 223620660.0,
+      "source_page": 16,
+      "row_order": 47
+    },
+    {
+      "date": "1404/12/08",
+      "time": "10:36",
+      "description": "انتقال MOB انتقال به حساب 723318579 شرح: 01-",
+      "deposit": 0.0,
+      "withdrawal": 90000000.0,
+      "balance": 133620660.0,
+      "source_page": 16,
+      "row_order": 48
+    },
+    {
+      "date": "1404/12/08",
+      "time": "10:36",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 133620210.0,
+      "source_page": 16,
+      "row_order": 49
+    },
+    {
+      "date": "1404/12/08",
+      "time": "12:57",
+      "description": "انتقال MOB انتقال از حساب 1076259856",
+      "deposit": 1000000000.0,
+      "withdrawal": 0.0,
+      "balance": 1133620210.0,
+      "source_page": 16,
+      "row_order": 50
+    },
+    {
+      "date": "1404/12/08",
+      "time": "13:16",
+      "description": "انتقال MOB انتقال به حساب 1091378987",
+      "deposit": 0.0,
+      "withdrawal": 95000000.0,
+      "balance": 1038620210.0,
+      "source_page": 16,
+      "row_order": 51
+    },
+    {
+      "date": "1404/12/08",
+      "time": "13:16",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 1038619760.0,
+      "source_page": 16,
+      "row_order": 52
+    },
+    {
+      "date": "1404/12/08",
+      "time": "13:17",
+      "description": "انتقال MOB انتقال به حساب 630031044",
+      "deposit": 0.0,
+      "withdrawal": 258600000.0,
+      "balance": 780019760.0,
+      "source_page": 16,
+      "row_order": 53
+    },
+    {
+      "date": "1404/12/08",
+      "time": "13:17",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 780019310.0,
+      "source_page": 16,
+      "row_order": 54
+    },
+    {
+      "date": "1404/12/08",
+      "time": "13:19",
+      "description": "انتقال MOB انتقال به حساب 739990633",
+      "deposit": 0.0,
+      "withdrawal": 95000000.0,
+      "balance": 685019310.0,
+      "source_page": 16,
+      "row_order": 55
+    },
+    {
+      "date": "1404/12/08",
+      "time": "13:19",
+      "description": "انتقال MOB",
+      "deposit": 0.0,
+      "withdrawal": 450.0,
+      "balance": 685018860.0,
+      "source_page": 16,
+      "row_order": 56
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "استخراج تصویری از صفحات 13-16 (4 تصویر)"
+}

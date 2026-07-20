@@ -1,0 +1,368 @@
+{
+  "page_number": 33,
+  "account_holder_name": null,
+  "transactions": [
+    {
+      "date": "1405/02/03",
+      "time": "22:46:54",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 229126052.0,
+      "source_page": 33,
+      "row_order": 0
+    },
+    {
+      "date": "1405/02/04",
+      "time": "08:45:40",
+      "description": "خرید از پوز پرداخت الکترونیک سداد",
+      "deposit": 0.0,
+      "withdrawal": 800000.0,
+      "balance": 228326052.0,
+      "source_page": 33,
+      "row_order": 1
+    },
+    {
+      "date": "1405/02/04",
+      "time": "08:53:40",
+      "description": "خرید از پوز پرداخت الکترونیک سداد",
+      "deposit": 0.0,
+      "withdrawal": 1600000.0,
+      "balance": 226726052.0,
+      "source_page": 33,
+      "row_order": 2
+    },
+    {
+      "date": "1405/02/04",
+      "time": "13:40:40",
+      "description": "حواله شاپرک ۰۵۰۲۰۳۰۳۱۱۰۰۰۰۰۰۰۰۲۶",
+      "deposit": 102900000.0,
+      "withdrawal": 0.0,
+      "balance": 329626052.0,
+      "source_page": 33,
+      "row_order": 3
+    },
+    {
+      "date": "1405/02/04",
+      "time": "15:09:57",
+      "description": "کارمزد ۱ حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 31040.0,
+      "balance": 329595012.0,
+      "source_page": 33,
+      "row_order": 4
+    },
+    {
+      "date": "1405/02/04",
+      "time": "18:51:13",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 600000.0,
+      "balance": 328995012.0,
+      "source_page": 33,
+      "row_order": 5
+    },
+    {
+      "date": "1405/02/05",
+      "time": "10:34:37",
+      "description": "پرداخت قبض از به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 697000.0,
+      "balance": 328298012.0,
+      "source_page": 33,
+      "row_order": 6
+    },
+    {
+      "date": "1405/02/05",
+      "time": "10:35:25",
+      "description": "پرداخت قبض از به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 189000.0,
+      "balance": 328109012.0,
+      "source_page": 33,
+      "row_order": 7
+    },
+    {
+      "date": "1405/02/05",
+      "time": "10:36:54",
+      "description": "پرداخت قبض از به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1015000.0,
+      "balance": 327094012.0,
+      "source_page": 33,
+      "row_order": 8
+    },
+    {
+      "date": "1405/02/05",
+      "time": "12:27:33",
+      "description": "خرید اینترنتی پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 37997523.0,
+      "balance": 289096489.0,
+      "source_page": 34,
+      "row_order": 9
+    },
+    {
+      "date": "1405/02/06",
+      "time": "05:22:40",
+      "description": "حواله شاپرک ۰۵۰۲۰۵۰۳۱۱۰۰۰۰۰۰۰۰۲۶",
+      "deposit": 87900000.0,
+      "withdrawal": 0.0,
+      "balance": 376996489.0,
+      "source_page": 34,
+      "row_order": 10
+    },
+    {
+      "date": "1405/02/06",
+      "time": "05:24:16",
+      "description": "حواله شاپرک ۰۵۰۲۰۵۰۳۱۱۰۰۰۰۰۰۰۰۳۹",
+      "deposit": 16050000.0,
+      "withdrawal": 0.0,
+      "balance": 393046489.0,
+      "source_page": 34,
+      "row_order": 11
+    },
+    {
+      "date": "1405/02/06",
+      "time": "06:19:19",
+      "description": "کارمزد ۲ حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 34380.0,
+      "balance": 393012109.0,
+      "source_page": 34,
+      "row_order": 12
+    },
+    {
+      "date": "1405/02/06",
+      "time": "08:39:55",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 5000000.0,
+      "balance": 388012109.0,
+      "source_page": 34,
+      "row_order": 13
+    },
+    {
+      "date": "1405/02/06",
+      "time": "09:36:20",
+      "description": "وصول چک چکاوک ۱-۱۴۵۰۴۱۹۰۱ ۲۷۰۲۴۰۱۴/۱۹۳۲",
+      "deposit": 0.0,
+      "withdrawal": 250000000.0,
+      "balance": 138012109.0,
+      "source_page": 34,
+      "row_order": 14
+    },
+    {
+      "date": "1405/02/06",
+      "time": "16:40:38",
+      "description": "کارت به کارت از ۳۲۸۳-۵۰۲۲۲۹۱۰۹۴۱۴۵۳ کیوسک تجارت ۸۸",
+      "deposit": 0.0,
+      "withdrawal": 18012200.0,
+      "balance": 119999909.0,
+      "source_page": 34,
+      "row_order": 15
+    },
+    {
+      "date": "1405/02/07",
+      "time": "04:31:07",
+      "description": "حواله شاپرک ۰۵۰۲۰۶۰۳۱۱۰۰۰۰۰۰۰۰۲۶",
+      "deposit": 196300000.0,
+      "withdrawal": 0.0,
+      "balance": 316299909.0,
+      "source_page": 34,
+      "row_order": 16
+    },
+    {
+      "date": "1405/02/07",
+      "time": "05:24:42",
+      "description": "کارمزد ۱ حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 44820.0,
+      "balance": 316255089.0,
+      "source_page": 34,
+      "row_order": 17
+    },
+    {
+      "date": "1405/02/07",
+      "time": "11:44:18",
+      "description": "خرید از پوز مبنا کارت آریا",
+      "deposit": 0.0,
+      "withdrawal": 450000.0,
+      "balance": 315805089.0,
+      "source_page": 35,
+      "row_order": 18
+    },
+    {
+      "date": "1405/02/07",
+      "time": "13:33:19",
+      "description": "خرید از پوز پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 4790000.0,
+      "balance": 311015089.0,
+      "source_page": 35,
+      "row_order": 19
+    },
+    {
+      "date": "1405/02/07",
+      "time": "21:15:17",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 1000000.0,
+      "balance": 310015089.0,
+      "source_page": 35,
+      "row_order": 20
+    },
+    {
+      "date": "1405/02/07",
+      "time": "21:22:54",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 2000000.0,
+      "balance": 308015089.0,
+      "source_page": 35,
+      "row_order": 21
+    },
+    {
+      "date": "1405/02/07",
+      "time": "23:02:03",
+      "description": "خرید از پوز پرداخت الکترونیک سداد",
+      "deposit": 0.0,
+      "withdrawal": 1350000.0,
+      "balance": 306665089.0,
+      "source_page": 35,
+      "row_order": 22
+    },
+    {
+      "date": "1405/02/08",
+      "time": "04:23:44",
+      "description": "حواله شاپرک ۰۵۰۲۰۷۰۳۱۱۰۰۰۰۰۰۰۰۲۶",
+      "deposit": 91250000.0,
+      "withdrawal": 0.0,
+      "balance": 397915089.0,
+      "source_page": 35,
+      "row_order": 23
+    },
+    {
+      "date": "1405/02/08",
+      "time": "05:24:43",
+      "description": "کارمزد ۱ حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 22790.0,
+      "balance": 397892299.0,
+      "source_page": 35,
+      "row_order": 24
+    },
+    {
+      "date": "1405/02/08",
+      "time": "07:20:59",
+      "description": "خرید از پوز سایان کارت",
+      "deposit": 0.0,
+      "withdrawal": 129000.0,
+      "balance": 397763299.0,
+      "source_page": 35,
+      "row_order": 25
+    },
+    {
+      "date": "1405/02/08",
+      "time": "07:24:56",
+      "description": "خرید از پوز پرداخت نوین آرین",
+      "deposit": 0.0,
+      "withdrawal": 6000000.0,
+      "balance": 391763299.0,
+      "source_page": 35,
+      "row_order": 26
+    },
+    {
+      "date": "1405/02/08",
+      "time": "09:45:58",
+      "description": "برداشت انتقالی طی چک",
+      "deposit": 0.0,
+      "withdrawal": 250000000.0,
+      "balance": 141763299.0,
+      "source_page": 36,
+      "row_order": 27
+    },
+    {
+      "date": "1405/02/08",
+      "time": "16:23:52",
+      "description": "پرداخت قبض از پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 1796000.0,
+      "balance": 139967299.0,
+      "source_page": 36,
+      "row_order": 28
+    },
+    {
+      "date": "1405/02/08",
+      "time": "19:26:56",
+      "description": "پرداخت قبض از پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 100000.0,
+      "balance": 139867299.0,
+      "source_page": 36,
+      "row_order": 29
+    },
+    {
+      "date": "1405/02/08",
+      "time": "20:24:58",
+      "description": "خرید از پوز به پرداخت ملت",
+      "deposit": 0.0,
+      "withdrawal": 2480000.0,
+      "balance": 137387299.0,
+      "source_page": 36,
+      "row_order": 30
+    },
+    {
+      "date": "1405/02/08",
+      "time": "21:32:21",
+      "description": "خرید از پوز تجارت الکترونیک پارسیان",
+      "deposit": 0.0,
+      "withdrawal": 2800000.0,
+      "balance": 134587299.0,
+      "source_page": 36,
+      "row_order": 31
+    },
+    {
+      "date": "1405/02/09",
+      "time": "04:28:12",
+      "description": "حواله شاپرک ۰۵۰۲۰۸۰۳۱۱۰۰۰۰۰۰۰۰۲۶",
+      "deposit": 56550000.0,
+      "withdrawal": 0.0,
+      "balance": 191137299.0,
+      "source_page": 36,
+      "row_order": 32
+    },
+    {
+      "date": "1405/02/09",
+      "time": "05:25:56",
+      "description": "کارمزد ۱ حواله سرجمع خرید شاپرک",
+      "deposit": 0.0,
+      "withdrawal": 14820.0,
+      "balance": 191122479.0,
+      "source_page": 36,
+      "row_order": 33
+    },
+    {
+      "date": "1405/02/09",
+      "time": "11:47:28",
+      "description": "خرید از پوز پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 4900000.0,
+      "balance": 186222479.0,
+      "source_page": 36,
+      "row_order": 34
+    },
+    {
+      "date": "1405/02/09",
+      "time": "11:55:35",
+      "description": "خرید از پوز پرداخت الکترونیک سامان",
+      "deposit": 0.0,
+      "withdrawal": 9800000.0,
+      "balance": 176422479.0,
+      "source_page": 36,
+      "row_order": 35
+    }
+  ],
+  "extraction_status": "ok",
+  "notes": "استخراج تصویری از صفحات 33-36 (4 تصویر)"
+}
