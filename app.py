@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+import asyncio
 
 import config
 from extractors.pdf_splitter import extract_page_data, split_pages_with_context, compute_file_hash
@@ -9,6 +10,11 @@ from processing.validator import verify_balance_continuity
 from processing.feature_engine import compute_features
 from analysis.narrative_llm import generate_narrative
 from analysis.account_router import route_and_analyze
+from db.session import init_db, AsyncSessionLocal
+from db import crud as db_crud
+from storage import minio_client as storage_client
+import faulthandler
+faulthandler.enable()
 
 # --- تنظیمات صفحه استریم‌لیت ---
 st.set_page_config(page_title="تحلیل‌گر صورتحساب بانکی", page_icon="📊", layout="wide")
@@ -66,101 +72,144 @@ if submit_button:
             file_bytes = uploaded_file.getvalue()
             file_hash = compute_file_hash(file_bytes)
 
-            # ---------- تفکیک صفحات ----------
-            with st.spinner("⏳ در حال خواندن و تحلیل صفحات PDF..."):
-                pages_data = extract_page_data(file_bytes)
-                chunks = split_pages_with_context(pages_data, overlap_lines=config.OVERLAP_LINES)
+            # ─── Step 0 [NEW]: Upload PDF to MinIO + init DB ───
+            with st.spinner("⏳ در حال آماده‌سازی زیرساخت ذخیره‌سازی..."):
+                asyncio.run(init_db())
+                storage_client.ensure_bucket()
+                storage_client.upload_pdf(file_hash, file_bytes, uploaded_file.name)
 
-            # نمایش تعداد صفحات و روش استخراج هر کدام
-            method_counts = {}
-            for p in pages_data:
-                m = p["method"]
-                method_counts[m] = method_counts.get(m, 0) + 1
+            # ─── Check DB cache ───
+            async def _check_db_cache():
+                async with AsyncSessionLocal() as db:
+                    return await db_crud.get_report_by_hash(db, file_hash)
 
-            method_labels = {
-                "camelot": "📊 جدولی (Camelot)",
-                "llm_required": "📝 متنی (LLM)",
-                "image_required": "🖼️ تصویری (Vision LLM)",
-            }
-            parts = [f"{method_labels.get(k, k)}: {v}" for k, v in method_counts.items()]
-            st.info(
-                f"📄 تعداد صفحات: {len(pages_data)} — "
-                f"تعداد chunks: {len(chunks)} (هر chunk شامل {config.PAGES_PER_CHUNK} صفحه) — "
-                f"روش‌ها: {', '.join(parts)}"
-            )
+            existing = asyncio.run(_check_db_cache())
+            if existing and existing.status == "completed":
+                st.success("✅ این فایل قبلاً تحلیل شده! نتایج قبلی نمایش داده می‌شود.")
+                features = json.loads(existing.features_json) if existing.features_json else {}
+                final_result = json.loads(existing.report_json) if existing.report_json else {}
+                routing_result = {"account_type": existing.account_type}
+                merge_metadata = {"account_holder_name": existing.account_holder_name}
 
-            # ---------- قدم ۱: استخراج ساخت‌یافته per-page ----------
-            progress_bar = st.progress(0, text="در حال استخراج تراکنش‌های هر صفحه...")
+            if existing and existing.status == "completed":
+                pass  # skip analysis, jump to display
+            else:
+                # ---------- تفکیک صفحات ----------
+                with st.spinner("⏳ در حال خواندن و تحلیل صفحات PDF..."):
+                    pages_data = extract_page_data(file_bytes)
+                    chunks = split_pages_with_context(pages_data, overlap_lines=config.OVERLAP_LINES)
 
-            def update_progress(completed, total, page_num):
-                progress_bar.progress(
-                    completed / total,
-                    text=f"صفحه {page_num} پردازش شد ({completed}/{total})",
+                # نمایش تعداد صفحات و روش استخراج هر کدام
+                method_counts = {}
+                for p in pages_data:
+                    m = p["method"]
+                    method_counts[m] = method_counts.get(m, 0) + 1
+
+                method_labels = {
+                    "camelot": "📊 جدولی (Camelot)",
+                    "llm_required": "📝 متنی (LLM)",
+                    "image_required": "🖼️ تصویری (Vision LLM)",
+                }
+                parts = [f"{method_labels.get(k, k)}: {v}" for k, v in method_counts.items()]
+                st.info(
+                    f"📄 تعداد صفحات: {len(pages_data)} — "
+                    f"تعداد chunks: {len(chunks)} (هر chunk شامل {config.PAGES_PER_CHUNK} صفحه) — "
+                    f"روش‌ها: {', '.join(parts)}"
                 )
 
-            page_results = extract_all_pages(
-                chunks,
-                api_key=config.OPENROUTER_API_KEY,
-                file_hash=file_hash,
-                progress_callback=update_progress,
-            )
-            progress_bar.empty()
+                # ---------- قدم ۱: استخراج ساخت‌یافته per-page ----------
+                progress_bar = st.progress(0, text="در حال استخراج تراکنش‌های هر صفحه...")
 
-            ok_count = sum(1 for p in page_results if p.extraction_status == "ok")
-            failed_count = sum(1 for p in page_results if p.extraction_status == "failed")
-            skipped_count = sum(1 for p in page_results if p.extraction_status == "skipped_empty")
-
-            st.success(f"✅ استخراج صفحات کامل شد: {ok_count} موفق، {failed_count} ناموفق، {skipped_count} خالی/رد شده")
-
-            if failed_count > 0:
-                failed_pages = [p.page_number for p in page_results if p.extraction_status == "failed"]
-                st.warning(f"⚠️ استخراج صفحات زیر ناموفق بود؛ ممکن است برخی تراکنش‌ها از قلم افتاده باشند: {failed_pages}")
-
-            # ---------- قدم ۲: یکپارچه‌سازی و اعتبارسنجی ----------
-            with st.spinner("🔗 در حال یکپارچه‌سازی و اعتبارسنجی تراکنش‌ها..."):
-                df, merge_metadata = run_merge_pipeline(page_results)
-
-                if df.empty:
-                    st.error("❌ هیچ تراکنشی از فایل استخراج نشد. لطفاً فایل را بررسی کنید.")
-                    st.stop()
-
-                df, balance_report = verify_balance_continuity(df)
-
-            quality_report = {**merge_metadata, **balance_report}
-
-            with st.expander("🔍 گزارش کیفیت داده و اعتبارسنجی"):
-                st.json(quality_report)
-                if balance_report["mismatch_count"] > 0:
-                    st.warning(
-                        f"⚠️ در {balance_report['mismatch_count']} ردیف، پیوستگی موجودی برقرار نبود؛ "
-                        "احتمالاً یک تراکنش جا افتاده یا خطای OCR/LLM رخ داده است."
+                def update_progress(completed, total, page_num):
+                    progress_bar.progress(
+                        completed / total,
+                        text=f"صفحه {page_num} پردازش شد ({completed}/{total})",
                     )
 
-            # ---------- قدم ۳: محاسبه فیچرها با کد ----------
-            with st.spinner("🧮 در حال محاسبه فیچرهای مالی..."):
-                features = compute_features(df)
-
-            with st.expander("📊 فیچرهای مالی محاسبه‌شده (deterministic)"):
-                st.json(features)
-
-            # ---------- قدم ۴: Two-Step LLM Routing (دسته‌بندی + تحلیل تخصصی) ----------
-            with st.spinner("🧠 در حال دسته‌بندی نوع حساب و تحلیل تخصصی توسط هوش مصنوعی..."):
-                routing_result = route_and_analyze(
-                    features=features,
+                page_results = extract_all_pages(
+                    chunks,
                     api_key=config.OPENROUTER_API_KEY,
+                    file_hash=file_hash,
+                    progress_callback=update_progress,
                 )
+                progress_bar.empty()
 
-            # ---------- قدم ۵: تحلیل کیفی نهایی (با استفاده از خروجی Routing) ----------
-            with st.spinner("🧠 در حال تولید تحلیل روایت ریسک توسط هوش مصنوعی..."):
-                final_result = generate_narrative(
-                    features=features,
-                    quality_report=quality_report,
-                    account_holder_name=merge_metadata.get("account_holder_name"),
-                    api_key=config.OPENROUTER_API_KEY,
-                    routing_result=routing_result,
-                )
+                ok_count = sum(1 for p in page_results if p.extraction_status == "ok")
+                failed_count = sum(1 for p in page_results if p.extraction_status == "failed")
+                skipped_count = sum(1 for p in page_results if p.extraction_status == "skipped_empty")
 
-            st.success("✅ تحلیل با موفقیت انجام شد!")
+                st.success(f"✅ استخراج صفحات کامل شد: {ok_count} موفق، {failed_count} ناموفق، {skipped_count} خالی/رد شده")
+
+                if failed_count > 0:
+                    failed_pages = [p.page_number for p in page_results if p.extraction_status == "failed"]
+                    st.warning(f"⚠️ استخراج صفحات زیر ناموفق بود؛ ممکن است برخی تراکنش‌ها از قلم افتاده باشند: {failed_pages}")
+
+                # ---------- قدم ۲: یکپارچه‌سازی و اعتبارسنجی ----------
+                with st.spinner("🔗 در حال یکپارچه‌سازی و اعتبارسنجی تراکنش‌ها..."):
+                    df, merge_metadata = run_merge_pipeline(page_results)
+
+                    if df.empty:
+                        st.error("❌ هیچ تراکنشی از فایل استخراج نشد. لطفاً فایل را بررسی کنید.")
+                        st.stop()
+
+                    df, balance_report = verify_balance_continuity(df)
+
+                quality_report = {**merge_metadata, **balance_report}
+
+                with st.expander("🔍 گزارش کیفیت داده و اعتبارسنجی"):
+                    st.json(quality_report)
+                    if balance_report["mismatch_count"] > 0:
+                        st.warning(
+                            f"⚠️ در {balance_report['mismatch_count']} ردیف، پیوستگی موجودی برقرار نبود؛ "
+                            "احتمالاً یک تراکنش جا افتاده یا خطای OCR/LLM رخ داده است."
+                        )
+
+                # ---------- قدم ۳: محاسبه فیچرها با کد ----------
+                with st.spinner("🧮 در حال محاسبه فیچرهای مالی..."):
+                    features = compute_features(df)
+
+                with st.expander("📊 فیچرهای مالی محاسبه‌شده (deterministic)"):
+                    st.json(features)
+
+                # ---------- قدم ۴: Two-Step LLM Routing (دسته‌بندی + تحلیل تخصصی) ----------
+                with st.spinner("🧠 در حال دسته‌بندی نوع حساب و تحلیل تخصصی توسط هوش مصنوعی..."):
+                    routing_result = route_and_analyze(
+                        features=features,
+                        api_key=config.OPENROUTER_API_KEY,
+                    )
+
+                # ---------- قدم ۵: تحلیل کیفی نهایی (با استفاده از خروجی Routing) ----------
+                with st.spinner("🧠 در حال تولید تحلیل روایت ریسک توسط هوش مصنوعی..."):
+                    final_result = generate_narrative(
+                        features=features,
+                        quality_report=quality_report,
+                        account_holder_name=merge_metadata.get("account_holder_name"),
+                        api_key=config.OPENROUTER_API_KEY,
+                        routing_result=routing_result,
+                    )
+
+                st.success("✅ تحلیل با موفقیت انجام شد!")
+
+                # ─── Step 6 [NEW]: Save results to PostgreSQL ───
+                async def _save_to_db():
+                    async with AsyncSessionLocal() as db:
+                        report = await db_crud.create_report(
+                            db,
+                            file_hash=file_hash,
+                            original_filename=uploaded_file.name,
+                            account_holder_name=merge_metadata.get("account_holder_name"),
+                            account_type=routing_result.get("account_type") if routing_result else None,
+                            features=features,
+                            report=final_result,
+                        )
+                        txns = df.to_dict("records")
+                        for t in txns:
+                            t.pop("parsed_date", None)
+                            t.pop("month", None)
+                        await db_crud.save_transactions_bulk(db, report.id, txns)
+                asyncio.run(_save_to_db())
+
+            # ─── DISPLAY: Results (shared by fresh analysis and cache hit) ───
 
             # استخراج transactional_power_score از تحلیل تخصصی (فقط برای حساب تجاری)
             if routing_result:
@@ -257,4 +306,11 @@ if submit_button:
         except json.JSONDecodeError:
             st.error("❌ خطایی در خواندن ساختار خروجی مدل رخ داد. لطفاً مجدداً تلاش کنید.")
         except Exception as e:
-            st.error(f"❌ خطای سیستمی: {e}")
+            error_msg = str(e).lower()
+            if "403" in error_msg and ("limit" in error_msg or "forbidden" in error_msg):
+                st.error("🚫 **محدودیت مصرف روزانه به پایان رسیده است!**")
+                st.warning("اعتبار کلید ارتباطی با هوش مصنوعی (API) تمام شده است. لطفاً حساب کاربری خود را بررسی کرده و سقف مصرف را افزایش دهید.")
+            elif "connection" in error_msg or "network" in error_msg:
+                st.error("🌐 خطای ارتباط با شبکه رخ داد. لطفاً وضعیت اینترنت سرور را بررسی کنید.")
+            else:
+                st.error(f"❌ خطای سیستمی در حین پردازش: {e}")

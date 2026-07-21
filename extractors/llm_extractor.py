@@ -1,9 +1,7 @@
 import json
-import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from extractors.schemas import PageExtractionResult
-from extractors.pdf_splitter import mask_sensitive_info
 from extractors.camelot_extractor import parse_camelot_to_page_result
 from utils.api_client import call_llm
 import config
@@ -80,12 +78,6 @@ def _clean_json_response(raw_text: str) -> str:
     return text.strip()
 
 
-def _cache_path(file_hash: str, page_number: int) -> str:
-    cache_dir = os.path.join(config.CACHE_DIR, file_hash)
-    os.makedirs(cache_dir, exist_ok=True)
-    return os.path.join(cache_dir, f"page_{page_number}.json")
-
-
 def _build_page_result(page_number, data):
     """ساخت PageExtractionResult از دیکشنری JSON خروجی مدل."""
     transactions = []
@@ -105,16 +97,6 @@ def _build_page_result(page_number, data):
 
 def _call_llm_extraction(page_number, prompt, api_key, file_hash):
     """فراخوانی LLM و ساخت PageExtractionResult."""
-    cache_file = _cache_path(file_hash, page_number) if file_hash else None
-    if cache_file and os.path.exists(cache_file):
-        try:
-            with open(cache_file, "r", encoding="utf-8") as f:
-                cached = PageExtractionResult(**json.load(f))
-                print(f"💾 [extractor] صفحه {page_number}: از cache خوانده شد ({len(cached.transactions)} تراکنش)")
-                return cached
-        except Exception:
-            pass
-
     last_error = None
     for attempt in range(config.MAX_EXTRACTION_RETRIES):
         try:
@@ -135,10 +117,6 @@ def _call_llm_extraction(page_number, prompt, api_key, file_hash):
             result = _build_page_result(page_number, data)
 
             print(f"✅ [extractor] صفحه {page_number}: {len(result.transactions)} تراکنش استخراج شد (پاسخ: {len(raw_response)} کاراکتر)")
-
-            if cache_file:
-                with open(cache_file, "w", encoding="utf-8") as f:
-                    json.dump(result.model_dump(), f, ensure_ascii=False, indent=2)
 
             return result
 
@@ -204,16 +182,6 @@ def _extract_with_llm_image(chunk, api_key, file_hash):
         chunk_text=chunk.get("text", ""),
     )
 
-    cache_file = _cache_path(file_hash, page_number) if file_hash else None
-    if cache_file and os.path.exists(cache_file):
-        try:
-            with open(cache_file, "r", encoding="utf-8") as f:
-                cached = PageExtractionResult(**json.load(f))
-                print(f"💾 [extractor] صفحات {page_range} (تصویری): از cache خوانده شد ({len(cached.transactions)} تراکنش)")
-                return cached
-        except Exception:
-            pass
-
     # لیست base64 برای ارسال
     b64_list = [img["image_b64"] for img in images_b64]
 
@@ -239,10 +207,6 @@ def _extract_with_llm_image(chunk, api_key, file_hash):
             result.notes = f"استخراج تصویری از صفحات {page_range} ({len(b64_list)} تصویر)"
 
             print(f"✅ [extractor] صفحات {page_range} (تصویری): {len(result.transactions)} تراکنش استخراج شد (پاسخ: {len(raw_response)} کاراکتر)")
-
-            if cache_file:
-                with open(cache_file, "w", encoding="utf-8") as f:
-                    json.dump(result.model_dump(), f, ensure_ascii=False, indent=2)
 
             return result
 
@@ -273,22 +237,7 @@ def _extract_with_camelot(chunk, api_key: str, file_hash: str = None):
     """استخراج جدول با Camelot — بدون فراخوانی LLM."""
     page_number = chunk["page_number"]
     tables_data = chunk.get("tables_data", [])
-
-    cache_file = _cache_path(file_hash, page_number) if file_hash else None
-    if cache_file and os.path.exists(cache_file):
-        try:
-            with open(cache_file, "r", encoding="utf-8") as f:
-                return PageExtractionResult(**json.load(f))
-        except Exception:
-            pass
-
-    result = parse_camelot_to_page_result(page_number, tables_data)
-
-    if cache_file:
-        with open(cache_file, "w", encoding="utf-8") as f:
-            json.dump(result.model_dump(), f, ensure_ascii=False, indent=2)
-
-    return result
+    return parse_camelot_to_page_result(page_number, tables_data)
 
 
 # ─── تابع اصلی استخراج یک chunk ──────────────────────────────────────────────

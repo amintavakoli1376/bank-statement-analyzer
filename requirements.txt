@@ -9,3 +9,6 @@ pydantic
 jdatetime
 numpy
 camelot-py[cv]
+sqlalchemy[asyncio]>=2.0
+asyncpg>=0.29
+minio>=7.2

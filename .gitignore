@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Docker
+.env.docker
+docker-compose.override.yml
+
+# Cache (deprecated — replaced by PostgreSQL)
+cache/

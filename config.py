@@ -19,7 +19,7 @@ BALANCE_TOLERANCE = float(os.environ.get("BALANCE_TOLERANCE", 1000))
 
 # حداکثر توکن خروجی برای جلوگیری از تکرنکیت پاسخ LLM
 # هر تراکنش ~100 توکن مصرف می‌کند.
-# وقتی چندین صفحه در یک chunk پردازش می‌شوند (تا PAGES_PER_CHUNK صفحه)،
+# وقتی چندین صفحه در یک chunk پردازش می‌شوند (تا PAGES_PER_CHUNK صفحه)，
 # خروجی می‌تواند بزرگ باشد: مثلاً 10 صفحه × 15 تراکنش × 100 توکن ≈ 15000 توکن
 MAX_OUTPUT_TOKENS = int(os.environ.get("MAX_OUTPUT_TOKENS", 16000))
 
@@ -31,8 +31,19 @@ MIN_TEXT_LENGTH_FOR_IMAGE = int(os.environ.get("MIN_TEXT_LENGTH_FOR_IMAGE", 20))
 # اگه 403 گرفتید، این عدد رو کم کنید (مثلاً 2 یا 3)
 MAX_IMAGES_PER_REQUEST = int(os.environ.get("MAX_IMAGES_PER_REQUEST", 4))
 
-CACHE_DIR = os.environ.get("CACHE_DIR", "cache")
-
 # ─── تنظیمات Camelot ────────────────────────────────────────────────────────
-USE_CAMELOT = os.environ.get("USE_CAMELOT", "true").lower() in ("true", "1", "yes")
+USE_CAMELOT = os.environ.get("USE_CAMELOT", "false").lower() in ("true", "1", "yes")
 MIN_CAMELOT_TABLE_ROWS = int(os.environ.get("MIN_CAMELOT_TABLE_ROWS", 2))
+
+# ─── Database ────────────────────────────────────────────────────────────────
+DATABASE_URL = os.environ.get(
+    "DATABASE_URL",
+    "postgresql+asyncpg://postgres:postgres@localhost:5432/bank_analyzer",
+)
+
+# ─── MinIO ───────────────────────────────────────────────────────────────────
+MINIO_ENDPOINT = os.environ.get("MINIO_ENDPOINT", "localhost:9000")
+MINIO_ACCESS_KEY = os.environ.get("MINIO_ACCESS_KEY", "minioadmin")
+MINIO_SECRET_KEY = os.environ.get("MINIO_SECRET_KEY", "minioadmin")
+MINIO_BUCKET = os.environ.get("MINIO_BUCKET", "bank-statements")
+MINIO_SECURE = os.environ.get("MINIO_SECURE", "false").lower() in ("true", "1", "yes")

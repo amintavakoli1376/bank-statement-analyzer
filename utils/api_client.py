@@ -62,7 +62,11 @@ def call_llm(
         try:
             start_time = time.time()
             response = requests.post(
+<<<<<<< HEAD
                 url="https://openrouter.ai/api/v1/chat/completions",
+=======
+                url="https://openrouter-proxy.amin76tavakoli76.workers.dev/api/v1/chat/completions",
+>>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
                 headers=headers,
                 json=payload,
                 timeout=timeout,
