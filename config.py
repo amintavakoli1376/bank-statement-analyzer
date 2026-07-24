@@ -21,7 +21,7 @@ BALANCE_TOLERANCE = float(os.environ.get("BALANCE_TOLERANCE", 1000))
 # هر تراکنش ~100 توکن مصرف می‌کند.
 # وقتی چندین صفحه در یک chunk پردازش می‌شوند (تا PAGES_PER_CHUNK صفحه)，
 # خروجی می‌تواند بزرگ باشد: مثلاً 10 صفحه × 15 تراکنش × 100 توکن ≈ 15000 توکن
-MAX_OUTPUT_TOKENS = int(os.environ.get("MAX_OUTPUT_TOKENS", 16000))
+MAX_OUTPUT_TOKENS = int(os.environ.get("MAX_OUTPUT_TOKENS", 32000))
 
 MIN_TABLE_ROWS = int(os.environ.get("MIN_TABLE_ROWS", 2))
 MIN_TEXT_LENGTH_FOR_IMAGE = int(os.environ.get("MIN_TEXT_LENGTH_FOR_IMAGE", 20))
@@ -43,7 +43,19 @@ DATABASE_URL = os.environ.get(
 
 # ─── MinIO ───────────────────────────────────────────────────────────────────
 MINIO_ENDPOINT = os.environ.get("MINIO_ENDPOINT", "localhost:9000")
-MINIO_ACCESS_KEY = os.environ.get("MINIO_ACCESS_KEY", "minioadmin")
-MINIO_SECRET_KEY = os.environ.get("MINIO_SECRET_KEY", "minioadmin")
+MINIO_ACCESS_KEY = os.environ.get(
+    "MINIO_ACCESS_KEY", os.environ.get("MINIO_ROOT_USER", "minioadmin")
+)
+MINIO_SECRET_KEY = os.environ.get(
+    "MINIO_SECRET_KEY", os.environ.get("MINIO_ROOT_PASSWORD", "minioadmin")
+)
 MINIO_BUCKET = os.environ.get("MINIO_BUCKET", "bank-statements")
 MINIO_SECURE = os.environ.get("MINIO_SECURE", "false").lower() in ("true", "1", "yes")
+
+# ─── Proxy ───────────────────────────────────────────────────────────────────
+PROXY_URLS = [
+    "https://openrouter-proxy.amin76tavakoli76.workers.dev",
+    "https://openrouter-proxy.rahoh97196.workers.dev",
+    "https://openrouter-proxy.amin762tavakoli762.workers.dev"
+]
+

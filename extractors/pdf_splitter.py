@@ -33,21 +33,6 @@ def compute_file_hash(file_bytes: bytes) -> str:
 # ─── تبدیل صفحه به عکس ──────────────────────────────────────────────────────
 
 
-<<<<<<< HEAD
-def page_to_image_b64(page) -> str:
-    """تبدیل صفحه pdfplumber به PNG base64 برای ارسال به مدل vision."""
-    img = page.to_image(resolution=150)
-    buf = io.BytesIO()
-    img.save(buf, format="PNG")
-    return base64.b64encode(buf.getvalue()).decode("utf-8")
-=======
-# def page_to_image_b64(page) -> str:
-#     """تبدیل صفحه pdfplumber به PNG base64 برای ارسال به مدل vision."""
-#     img = page.to_image(resolution=150)
-#     buf = io.BytesIO()
-#     img.save(buf, format="PNG")
-#     return base64.b64encode(buf.getvalue()).decode("utf-8")
-
 def page_to_image_b64_fitz(fitz_page) -> str:
     """
     تبدیل صفحه به PNG با استفاده از موتور PyMuPDF.
@@ -60,7 +45,6 @@ def page_to_image_b64_fitz(fitz_page) -> str:
     # خروجی گرفتن به صورت بایت‌های PNG
     img_bytes = pix.tobytes("png")
     return base64.b64encode(img_bytes).decode("utf-8")
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
 
 
 # ─── متن‌خوانی تقویتی با PyMuPDF ────────────────────────────────────────────
@@ -86,72 +70,6 @@ def _extract_text_with_fitz(file_bytes: bytes, page_idx: int) -> str:
 # ─── استخراج متن/تصویر هر صفحه ─────────────────────────────────────────────
 
 
-<<<<<<< HEAD
-def extract_page_data(file_bytes: bytes):
-    """
-    استخراج متن، تصویر یا جدول هر صفحه PDF.
-
-    دو حالت:
-      1. "camelot"          — جدول ساختاریافته قابل استخراج با Camelot
-      2. "image_required"   — صفحه تصویری/اسکن (نیاز به vision LLM)
-    """
-    pages_data = []
-=======
-# def extract_page_data(file_bytes: bytes):
-#     """
-#     استخراج متن، تصویر یا جدول هر صفحه PDF.
-
-#     دو حالت:
-#       1. "camelot"          — جدول ساختاریافته قابل استخراج با Camelot
-#       2. "image_required"   — صفحه تصویری/اسکن (نیاز به vision LLM)
-#     """
-#     pages_data = []
-#     with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
-#         total_pages = len(pdf.pages)
-#         print(f"\n📖 [splitter] شروع استخراج از PDF با {total_pages} صفحه")
-
-#         for page_idx, page in enumerate(pdf.pages):
-#             page_num = page_idx + 1
-
-#             # استخراج متن با pdfplumber
-#             text = page.extract_text() or ""
-#             text_stripped = text.strip()
-
-#             # تلاش برای متن بهتر با PyMuPDF
-#             fitz_text = _extract_text_with_fitz(file_bytes, page_idx)
-#             effective_text = fitz_text if (fitz_text and len(fitz_text) > len(text_stripped)) else text_stripped
-
-#             # ─── اولویت اول: تلاش برای استخراج جدول با Camelot ───
-#             if config.USE_CAMELOT:
-#                 camelot_dfs = try_extract_tables(file_bytes, page_idx)
-#                 if camelot_dfs:
-#                     pages_data.append({
-#                         "method": "camelot",
-#                         "page_number": page_num,
-#                         "tables_data": camelot_dfs,
-#                         "raw_text": effective_text,  # برای استخراج نام صاحب حساب
-#                     })
-#                     continue
-
-#             # ─── اولویت دوم: فقط تصویر (حالت متنی حذف شد) ───
-#             image_b64 = page_to_image_b64(page)
-#             pages_data.append({
-#                 "method": "image_required",
-#                 "page_number": page_num,
-#                 "image_b64": image_b64,
-#                 "raw_text": effective_text,
-#             })
-
-#     # لاگ خلاصه‌ی روش استخراج هر صفحه
-#     print(f"📖 [splitter] استخراج کامل شد:")
-#     labels = {"camelot": "📊 جدولی", "image_required": "🖼️ تصویری"}
-#     for p in pages_data:
-#         len_text = len(p.get("raw_text", ""))
-#         label = labels.get(p["method"], p["method"])
-#         print(f"   صفحه {p['page_number']}: {label} (متن: {len_text} کاراکتر)")
-
-#     return pages_data
-
 def extract_page_data(file_bytes: bytes):
     pages_data = []
     
@@ -163,7 +81,6 @@ def extract_page_data(file_bytes: bytes):
         except Exception:
             pass
 
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
     with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
         total_pages = len(pdf.pages)
         print(f"\n📖 [splitter] شروع استخراج از PDF با {total_pages} صفحه")
@@ -175,16 +92,11 @@ def extract_page_data(file_bytes: bytes):
             text = page.extract_text() or ""
             text_stripped = text.strip()
 
-<<<<<<< HEAD
-            # تلاش برای متن بهتر با PyMuPDF
-            fitz_text = _extract_text_with_fitz(file_bytes, page_idx)
-=======
             # تلاش برای متن بهتر با PyMuPDF (استفاده از داکیومنت باز شده)
             fitz_text = ""
             if fitz_doc and page_idx < len(fitz_doc):
                 fitz_text = fitz_doc[page_idx].get_text("text").strip()
             
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
             effective_text = fitz_text if (fitz_text and len(fitz_text) > len(text_stripped)) else text_stripped
 
             # ─── اولویت اول: تلاش برای استخراج جدول با Camelot ───
@@ -195,14 +107,6 @@ def extract_page_data(file_bytes: bytes):
                         "method": "camelot",
                         "page_number": page_num,
                         "tables_data": camelot_dfs,
-<<<<<<< HEAD
-                        "raw_text": effective_text,  # برای استخراج نام صاحب حساب
-                    })
-                    continue
-
-            # ─── اولویت دوم: فقط تصویر (حالت متنی حذف شد) ───
-            image_b64 = page_to_image_b64(page)
-=======
                         "raw_text": effective_text,
                     })
                     continue
@@ -218,7 +122,6 @@ def extract_page_data(file_bytes: bytes):
                 img.save(buf, format="PNG")
                 image_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
 
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
             pages_data.append({
                 "method": "image_required",
                 "page_number": page_num,
@@ -226,14 +129,10 @@ def extract_page_data(file_bytes: bytes):
                 "raw_text": effective_text,
             })
 
-<<<<<<< HEAD
-    # لاگ خلاصه‌ی روش استخراج هر صفحه
-=======
-    # بستن داکیومنت PyMuPDF
+# بستن داکیومنت PyMuPDF
     if fitz_doc:
         fitz_doc.close()
 
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
     print(f"📖 [splitter] استخراج کامل شد:")
     labels = {"camelot": "📊 جدولی", "image_required": "🖼️ تصویری"}
     for p in pages_data:
@@ -243,10 +142,7 @@ def extract_page_data(file_bytes: bytes):
 
     return pages_data
 
-<<<<<<< HEAD
 
-=======
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
 # ─── ساخت chunk از چند صفحه ──────────────────────────────────────────────────
 
 

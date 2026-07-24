@@ -1,8 +1,26 @@
 import time
+import itertools
+import threading
 import requests
 
 import config
 
+_proxy_lock = threading.Lock()
+_proxy_cycle = itertools.cycle(config.PROXY_URLS)
+_current_proxy = next(_proxy_cycle)
+
+
+def _get_current_proxy() -> str:
+    with _proxy_lock:
+        return _current_proxy
+
+
+def _rotate_proxy() -> str:
+    global _current_proxy
+    with _proxy_lock:
+        _current_proxy = next(_proxy_cycle)
+        print(f"🔄 [api] تعویض پروکسی → {_current_proxy}")
+        return _current_proxy
 
 def call_llm(
     prompt: str,
@@ -10,7 +28,7 @@ def call_llm(
     model: str,
     temperature: float = 0.0,
     max_retries: int = 3,
-    timeout: int = 120,
+    timeout: int = 180,
     image_b64: str = None,
     images_b64: list = None,
 ) -> str:
@@ -59,14 +77,14 @@ def call_llm(
 
     last_exception = None
     for attempt in range(max_retries):
+        proxy_base = _get_current_proxy()
+        # اگر پروکسی تنظیم نشده، مستقیم به OpenRouter می‌زنیم
+        url = f"{proxy_base}/api/v1/chat/completions" if proxy_base else "https://openrouter.ai/api/v1/chat/completions"
+
         try:
             start_time = time.time()
             response = requests.post(
-<<<<<<< HEAD
-                url="https://openrouter.ai/api/v1/chat/completions",
-=======
-                url="https://openrouter-proxy.amin76tavakoli76.workers.dev/api/v1/chat/completions",
->>>>>>> a084173664107afb8cda54b75206cedbdb0a73de
+                url=url,
                 headers=headers,
                 json=payload,
                 timeout=timeout,
@@ -74,37 +92,43 @@ def call_llm(
             elapsed = time.time() - start_time
 
             if response.status_code == 429 or response.status_code >= 500:
+                print(f"⏳ [api] HTTP {response.status_code} از {proxy_base or 'مستقیم'}")
+                if proxy_base:
+                    _rotate_proxy()  # پروکسی فعلی مشکل داره، برو سراغ بعدی
                 wait_time = (2 ** attempt) + 1
-                print(f"⏳ [api] HTTP {response.status_code} — انتظار {wait_time}s و retry (تلاش {attempt + 1}/{max_retries})")
+                print(f"⏳ [api] انتظار {wait_time}s و retry (تلاش {attempt + 1}/{max_retries})")
                 time.sleep(wait_time)
                 continue
 
             response.raise_for_status()
             data = response.json()
 
-            # بررسی هوشمندانه‌ی finish_reason برای تشخیص تکرنکیت
             choice = data["choices"][0]
             finish_reason = choice.get("finish_reason", "unknown")
             content_text = choice["message"]["content"]
             usage = data.get("usage", {})
 
-            # هشدار اگر خروجی به‌دلیل محدودیت توکن قطع شده
             if finish_reason == "length":
-                print(f"⚠️ [api] هشدار: finish_reason='length' — خروجی به‌دلیل محدودیت max_tokens تکرنکیت شده! "
-                      f"ممکن است تراکنش‌هایی از قلم افتاده باشند. max_tokens={max_tokens}")
-                print(f"   برای رفع: مقدار MAX_OUTPUT_TOKENS در config.py را افزایش دهید.")
+                print(f"⚠️ [api] هشدار: finish_reason='length' — max_tokens={max_tokens}")
+                raise RuntimeError(
+                    f"TruncatedResponse: خروجی LLM ناقص است (finish_reason=length). "
+                    f"MAX_OUTPUT_TOKENS={max_tokens} را افزایش دهید یا PAGES_PER_CHUNK را کاهش دهید."
+                )
 
             img_info = f" | تصاویر: {len(images)}" if images else ""
-            print(f"🌐 [api] مدل: {model} | HTTP {response.status_code} | {elapsed:.1f}s{img_info} | "
-                  f"finish={finish_reason} | prompt_tokens={usage.get('prompt_tokens', '?')} | "
+            print(f"🌐 [api] مدل: {model} | پروکسی: {proxy_base} | HTTP {response.status_code} | "
+                  f"{elapsed:.1f}s{img_info} | finish={finish_reason} | "
+                  f"prompt_tokens={usage.get('prompt_tokens', '?')} | "
                   f"completion_tokens={usage.get('completion_tokens', '?')}")
 
             return content_text
 
         except requests.exceptions.RequestException as e:
             last_exception = e
+            print(f"❌ [api] خطای شبکه روی {proxy_base}: {e}")
+            _rotate_proxy()  # ⭐ اینجا proxy عوض میشه
             wait_time = (2 ** attempt) + 1
-            print(f"❌ [api] خطای شبکه: {e} — retry پس از {wait_time}s (تلاش {attempt + 1}/{max_retries})")
+            print(f"❌ [api] retry پس از {wait_time}s با پروکسی جدید (تلاش {attempt + 1}/{max_retries})")
             time.sleep(wait_time)
 
     raise RuntimeError(f"فراخوانی API پس از {max_retries} تلاش شکست خورد: {last_exception}")

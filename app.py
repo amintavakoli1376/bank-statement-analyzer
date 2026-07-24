@@ -1,6 +1,7 @@
 import streamlit as st
 import json
 import asyncio
+import threading
 
 import config
 from extractors.pdf_splitter import extract_page_data, split_pages_with_context, compute_file_hash
@@ -10,11 +11,35 @@ from processing.validator import verify_balance_continuity
 from processing.feature_engine import compute_features
 from analysis.narrative_llm import generate_narrative
 from analysis.account_router import route_and_analyze
-from db.session import init_db, AsyncSessionLocal
+from db.session import init_db, get_session
 from db import crud as db_crud
 from storage import minio_client as storage_client
 import faulthandler
 faulthandler.enable()
+
+
+def run_async(coro):
+    """Run coroutine in a dedicated thread to avoid Streamlit's event loop conflict."""
+    result = None
+    exc = None
+
+    def _runner():
+        nonlocal result, exc
+        try:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            result = loop.run_until_complete(coro)
+        except Exception as e:
+            exc = e
+        finally:
+            loop.close()
+
+    t = threading.Thread(target=_runner)
+    t.start()
+    t.join()
+    if exc:
+        raise exc
+    return result
 
 # --- تنظیمات صفحه استریم‌لیت ---
 st.set_page_config(page_title="تحلیل‌گر صورتحساب بانکی", page_icon="📊", layout="wide")
@@ -60,7 +85,7 @@ st.markdown("---")
 col_space1, col_input, col_space2 = st.columns([1, 2, 1])
 with col_input:
     uploaded_file = st.file_uploader("فایل صورتحساب بانکی خود را آپلود کنید (فرمت PDF)", type=["pdf"])
-    submit_button = st.button("🚀 شروع تحلیل و پردازش", use_container_width=True)
+    submit_button = st.button("🚀 شروع تحلیل و پردازش", width="stretch")
 
 if submit_button:
     if not config.OPENROUTER_API_KEY:
@@ -74,22 +99,27 @@ if submit_button:
 
             # ─── Step 0 [NEW]: Upload PDF to MinIO + init DB ───
             with st.spinner("⏳ در حال آماده‌سازی زیرساخت ذخیره‌سازی..."):
-                asyncio.run(init_db())
+                run_async(init_db())
                 storage_client.ensure_bucket()
                 storage_client.upload_pdf(file_hash, file_bytes, uploaded_file.name)
 
             # ─── Check DB cache ───
             async def _check_db_cache():
-                async with AsyncSessionLocal() as db:
-                    return await db_crud.get_report_by_hash(db, file_hash)
+                async with get_session() as db:
+                    report = await db_crud.get_report_by_hash(db, file_hash)
+                    if report and report.status == "completed":
+                        txn_df = await db_crud.get_transactions_df(db, report.id)
+                        return report, txn_df
+                    return report, None
 
-            existing = asyncio.run(_check_db_cache())
+            existing, cached_df = run_async(_check_db_cache())
             if existing and existing.status == "completed":
                 st.success("✅ این فایل قبلاً تحلیل شده! نتایج قبلی نمایش داده می‌شود.")
                 features = json.loads(existing.features_json) if existing.features_json else {}
                 final_result = json.loads(existing.report_json) if existing.report_json else {}
                 routing_result = {"account_type": existing.account_type}
                 merge_metadata = {"account_holder_name": existing.account_holder_name}
+                df = cached_df
 
             if existing and existing.status == "completed":
                 pass  # skip analysis, jump to display
@@ -192,7 +222,7 @@ if submit_button:
 
                 # ─── Step 6 [NEW]: Save results to PostgreSQL ───
                 async def _save_to_db():
-                    async with AsyncSessionLocal() as db:
+                    async with get_session() as db:
                         report = await db_crud.create_report(
                             db,
                             file_hash=file_hash,
@@ -204,10 +234,11 @@ if submit_button:
                         )
                         txns = df.to_dict("records")
                         for t in txns:
-                            t.pop("parsed_date", None)
-                            t.pop("month", None)
+                            # حذف ستون‌های کمکی و محاسباتی قبل از ذخیره در دیتابیس
+                            for key in ["parsed_date", "month", "expected_balance", "balance_diff", "balance_mismatch", "_quality"]:
+                                t.pop(key, None)
                         await db_crud.save_transactions_bulk(db, report.id, txns)
-                asyncio.run(_save_to_db())
+                run_async(_save_to_db())
 
             # ─── DISPLAY: Results (shared by fresh analysis and cache hit) ───
 
@@ -290,7 +321,7 @@ if submit_button:
             # تغییر نام ستون‌ها به فارسی
             df_final = df_display[display_cols].rename(columns=col_labels)
 
-            st.dataframe(df_final, use_container_width=True)
+            st.dataframe(df_final, width="stretch")
 
             csv_data = df_final.to_csv(index=False).encode("utf-8-sig")
             st.download_button(

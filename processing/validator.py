@@ -14,8 +14,8 @@ def verify_balance_continuity(df: pd.DataFrame, tolerance: float = None):
         return df, {"total_rows": 0, "mismatch_count": 0, "mismatch_rows": []}
 
     df = df.copy()
-    df["deposit"] = df["deposit"].fillna(0)
-    df["withdrawal"] = df["withdrawal"].fillna(0)
+    df["deposit"] = pd.to_numeric(df["deposit"], errors="coerce").fillna(0)
+    df["withdrawal"] = pd.to_numeric(df["withdrawal"], errors="coerce").fillna(0)
 
     # ── دیباگ: نمایش اطلاعات پایه ──
     print("\n" + "=" * 80)
