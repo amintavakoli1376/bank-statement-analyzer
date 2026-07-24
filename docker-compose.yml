@@ -32,6 +32,17 @@ services:
     volumes: [.:/app]
     restart: always
 
+  api:
+    build: .
+    env_file: .env.docker
+    command: uvicorn api:app --host 0.0.0.0 --port 8000
+    depends_on:
+      postgres: { condition: service_healthy }
+      minio: { condition: service_healthy }
+    ports: ["8000:8000"]
+    volumes: [.:/app]
+    restart: always
+
 volumes:
   pgdata:
   minio_data:

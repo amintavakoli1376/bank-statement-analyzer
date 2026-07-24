@@ -1,4 +1,7 @@
 streamlit
+fastapi
+uvicorn[standard]
+python-multipart
 pdfplumber
 PyMuPDF>=1.24.0
 google-genai
